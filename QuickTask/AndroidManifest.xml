@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tmq.t3h.quicktask"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="17" />
+
+ <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+ <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+ <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+ <uses-permission android:name="android.permission.SEND_SMS"/>
+    
+ <application
+        android:allowBackup="true"
+        android:icon="@drawable/call"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.tmq.t3h.quicktask.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <service android:name="com.tmq.t3h.quicktask.service.MyService"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnOpen"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnClose"></service>
+        <service android:name="com.tmq.t3h.quicktask.message.BtnMessage"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnRecall"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnRecord"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnNote"></service>
+        <service android:name="com.tmq.t3h.quicktask.service.BtnContact"></service>
+        <service android:name="com.tmq.t3h.quicktask.message.MessageBox"></service>
+        
+        <receiver android:name="com.tmq.t3h.quicktask.MyCallReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

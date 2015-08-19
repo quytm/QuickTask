@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    tools:context="com.tmq.t3h.quicktask.MainActivity" 
+    android:background="@drawable/bg_layout"
+    >
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/btn_open"
+        />
+
+    <EditText
+        android:id="@+id/edtMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/btnSend"
+        android:layout_toLeftOf="@+id/btnSend"
+        android:background="@android:color/holo_blue_light"
+        android:text="Hello!">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/txtContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSend"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@android:color/holo_red_dark"
+        />
+
+    <Button
+        android:id="@+id/btnClose1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_red_dark"
+        android:text="x" 
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>
