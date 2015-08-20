@@ -1,82 +1,66 @@
 package com.tmq.t3h.quicktask.message;
 
-import android.app.Service;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
-import com.tmq.t3h.quicktask.MyView;
 import com.tmq.t3h.quicktask.R;
+import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
 
-public class MessageBox extends Service implements OnItemClickListener{
-	private static final String TAG = "MessageBox";
-	private LayoutInflater layoutInf;
-	private MyView mViewContainer;
-	private WindowManager mWindow;
-	private View mView;
-	private LayoutParams mParams;
+public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener{
 	
+	private static final String TAG = "MessageBox";
+	
+	private EditText edtWriteMessage;
+	private Button btnSendMessage;
 	private ListView listMessage;
 	private AdapterMessage adapter;
-	
-	private String phoneNumber;
 
 	@Override
 	public void onCreate() {
-		Log.i(TAG, "Oncreate...");
-		layoutInf = LayoutInflater.from(this);
-		mViewContainer = new MyView(this);
-		mView = layoutInf.inflate(R.layout.message_list, mViewContainer);
-		mWindow = (WindowManager) getSystemService(WINDOW_SERVICE);
 		adapter = new AdapterMessage(this);
-		
-		// Get Params
-		mParams = new LayoutParams();
+		super.onCreate();
+	}
+	
+	@Override
+	protected int setIdLayout() {
+		return R.layout.message_list;
+	}
+
+	@Override
+	protected void setForLayoutParams() {
 		mParams.gravity = Gravity.CENTER_VERTICAL | Gravity.BOTTOM;
-		mParams.width = LayoutParams.WRAP_CONTENT;
-		mParams.height = LayoutParams.WRAP_CONTENT;
 		mParams.flags = LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
-						LayoutParams.FLAG_NOT_FOCUSABLE |
+						LayoutParams.FLAG_NOT_TOUCH_MODAL |
 						LayoutParams.FLAG_HARDWARE_ACCELERATED;
-		mParams.type = LayoutParams.TYPE_PHONE;
-		mParams.format = PixelFormat.TRANSPARENT;
-//		mParams.y = ;
-		
-		Log.i(TAG, "Get view");
-		// Get View
+	}
+
+	@Override
+	protected void initViewsInLayout() {
 		listMessage = (ListView) mView.findViewById(R.id.listMessage);
 		listMessage.setAdapter(adapter);
 		listMessage.setOnItemClickListener(this);
 		
-		mWindow.addView(mView, mParams);
-		
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (mViewContainer!=null){
-			((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mViewContainer);
-			mViewContainer=null;
-		}
-	}
-	
-	
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
+		edtWriteMessage = (EditText) mView.findViewById(R.id.edtWriteMessage);
+		btnSendMessage = (Button) mView.findViewById(R.id.btnSendMessage);
+		btnSendMessage.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String content = edtWriteMessage.getText().toString();
+				sendMessage(content);
+			}
+		});
 	}
 	
 	@Override
@@ -97,6 +81,4 @@ public class MessageBox extends Service implements OnItemClickListener{
 		Log.i(TAG, "Complete:\tPhone: " + phoneNumber + "\tMsg: " + message);
 		Toast.makeText(this, "Send SMS to " + phoneNumber + " complete!", Toast.LENGTH_SHORT).show();
 	}
-
-	
 }

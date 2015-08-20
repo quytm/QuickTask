@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-
+    
     <ListView
         android:id="@+id/listMessage"
         android:layout_width="200dp"
@@ -13,20 +13,28 @@
     </ListView>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content" >
 
         <EditText
             android:id="@+id/edtWriteMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="40dp"
             android:layout_weight="1"
-            android:text="" />
+            android:hint="Message..."
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"/>
 
         <Button
             android:id="@+id/btnSendMessage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/holo_orange_light"
+            android:text=">>"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
             />
 
     </LinearLayout>

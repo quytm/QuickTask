@@ -13,7 +13,6 @@ public class BtnMessage extends BtnComponent{
 	private static final String TAG = "BtnMessage";
 	private boolean messageBoxIsShowed = false;
 
-	
 	@Override
 	protected int setPosition() {
 		return 960;

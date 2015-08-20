@@ -21,7 +21,6 @@ import com.tmq.t3h.quicktask.MyView;
 import com.tmq.t3h.quicktask.R;
 
 public abstract class LayoutInWindowMgr extends Service{
-	private static final String TAG = "LayoutInWindowMgr";
 	private LayoutInflater layoutInf;
 	private MyView mViewContainer;
 	private WindowManager mWindow;
@@ -32,7 +31,6 @@ public abstract class LayoutInWindowMgr extends Service{
 
 	@Override
 	public void onCreate() {
-		Log.i(TAG, "Oncreate...");
 		layoutInf = LayoutInflater.from(this);
 		mViewContainer = new MyView(this);
 		mView = layoutInf.inflate(setIdLayout(), mViewContainer);

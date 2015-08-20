@@ -27,10 +27,8 @@ public class AdapterMessage extends BaseAdapter{
 		listMsg.add("Tôi đang bận! Xin gọi lại sau");
 		listMsg.add("Tôi đang trong lớp học");
 		listMsg.add("Tôi đang làm việc");
-		listMsg.add("Tôi đang trong Toilet");
 		listMsg.add("Tôi đang họp");
 		listMsg.add("Tôi đang đi trên đường");
-		listMsg.add("Tôi đang xyz...");
 	}
 	
 	@Override
