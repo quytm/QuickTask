@@ -15,6 +15,9 @@ public class CommonVL {
 
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
 	public static final String PHONE_STATE = "quicktask.phone_state";
+	public static final String NOTE_SHAREPREFERENCES = "data_note_sharepreferences";
+	public static final String NUMBER_NOTE = "number_note";
+	public static final String NOTE_ = "note_";
 	
 	
 	public static void stopAllService(Context context) {
