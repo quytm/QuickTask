@@ -7,6 +7,7 @@ import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.BtnComponent;
 
 public class BtnNote extends BtnComponent{
+	private boolean noteBoxIsShow = false;
 
 	@Override
 	protected int setPosition() {
@@ -20,9 +21,18 @@ public class BtnNote extends BtnComponent{
 	
 	@Override
 	public void onClick(View v) {
-		Intent intent = new Intent();
-		intent.setClass(this, NoteBox.class);
-		startService(intent);
+		if (!noteBoxIsShow){
+			Intent intent = new Intent();
+			intent.setClass(this, NoteBox.class);
+			startService(intent);
+			noteBoxIsShow = true;
+		}else{
+			Intent intent = new Intent();
+			intent.setClass(this, NoteBox.class);
+			stopService(intent);
+			noteBoxIsShow = false;
+		}
+		
 	}
 
 	@Override

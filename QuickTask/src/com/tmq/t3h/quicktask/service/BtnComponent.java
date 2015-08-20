@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 
 import com.tmq.t3h.quicktask.MyView;
@@ -24,8 +27,8 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 	
 	protected Button btnComponent;
 	
-	protected String phoneNumber = "6969696969";
-	protected String phoneState = "Idle idle";
+	protected String phoneNumber = "000 000 000";
+	protected String phoneState = "Idle Idle Idle";
 	
 	@Override
 	public void onCreate() {
@@ -64,12 +67,6 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 		}
 	}
 	
-//	
-//	@Override
-//	public void onClick(View v) {
-//		onClickComponent();
-//	}
-
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;

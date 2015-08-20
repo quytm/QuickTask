@@ -86,7 +86,6 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 	private void saveNote(){
 		String content = edtNoteContent.getText().toString();
 		if (content==null || content=="") return;
-//		Toast.makeText(this, "SAVE: " + content, Toast.LENGTH_SHORT).show();
 		noteSharePref = getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
 		
 		int numberNote = noteSharePref.getInt(CommonVL.NUMBER_NOTE, 0) + 1;
