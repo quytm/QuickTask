@@ -4,21 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
-import android.telephony.SmsManager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.MyView;
-import com.tmq.t3h.quicktask.R;
 
 public abstract class LayoutInWindowMgr extends Service{
 	private LayoutInflater layoutInf;

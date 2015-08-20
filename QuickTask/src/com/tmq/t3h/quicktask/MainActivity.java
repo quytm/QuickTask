@@ -1,13 +1,11 @@
 package com.tmq.t3h.quicktask;
 
-import com.tmq.t3h.quicktask.R;
-import com.tmq.t3h.quicktask.service.BtnOpen;
-import com.tmq.t3h.quicktask.service.MyService;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.tmq.t3h.quicktask.service.BtnOpen;
 
 public class MainActivity extends Activity {
 

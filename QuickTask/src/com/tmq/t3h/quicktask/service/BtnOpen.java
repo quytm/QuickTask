@@ -1,7 +1,6 @@
 package com.tmq.t3h.quicktask.service;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.Toast;

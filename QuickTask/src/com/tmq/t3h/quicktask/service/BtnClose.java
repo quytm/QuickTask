@@ -2,7 +2,6 @@ package com.tmq.t3h.quicktask.service;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.R;

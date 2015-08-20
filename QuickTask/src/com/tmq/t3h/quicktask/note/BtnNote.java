@@ -2,7 +2,6 @@ package com.tmq.t3h.quicktask.note;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.BtnComponent;

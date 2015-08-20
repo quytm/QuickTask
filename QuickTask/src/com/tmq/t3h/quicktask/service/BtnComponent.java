@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 
-import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.MyView;
 import com.tmq.t3h.quicktask.R;
 
