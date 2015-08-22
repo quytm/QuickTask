@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@android:color/holo_blue_light">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="@android:color/white"
+        android:layout_margin="2dp">
+   	     
+    	<TextView
+	        android:id="@+id/txtRecallAmuontOfHour"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:gravity="right|center_vertical"
+	        android:text="0"
+	        android:textSize="20sp"
+	        android:textColor="@android:color/holo_orange_dark" />
+
+    	<SeekBar
+    	    android:id="@+id/sbrRecallHour"
+    	    android:layout_width="200dp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignParentRight="true"
+    	    android:layout_alignParentTop="true"
+    	    android:max="12"
+    	    android:progress="0" />
+
+    	<TextView
+    	    android:id="@+id/txtRecallHour"
+    	    android:layout_width="30dp"
+    	    android:layout_height="30dp"
+    	    android:layout_alignBottom="@+id/txtRecallAmuontOfHour"
+    	    android:layout_toRightOf="@+id/txtRecallAmuontOfHour"
+    	    android:layout_marginLeft="5dp"
+    	    android:gravity="center_vertical"
+    	    android:text="h" />
+    		
+    	<TextView
+	        android:id="@+id/txtRecallMinute"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:gravity="center_vertical"
+	        android:layout_alignBottom="@+id/txtRecallAmuontOfMinute"
+    	    android:layout_toRightOf="@+id/txtRecallAmuontOfMinute"
+    	    android:layout_marginLeft="5dp"
+	        android:text="min" />
+    	
+    	<TextView
+	        android:id="@+id/txtRecallAmuontOfMinute"
+	        android:layout_width="30dp"
+	        android:layout_height="30dp"
+	        android:layout_below="@+id/txtRecallHour"
+	        android:layout_marginTop="10dp"
+	        android:gravity="right|center_vertical"
+	        android:text="30"
+	        android:textSize="20sp" 
+	        android:textColor="@android:color/holo_orange_light" />
+
+    	<SeekBar
+    	    android:id="@+id/sbrRecallMinute"
+    	    android:layout_width="200dp"
+    	    android:layout_height="wrap_content"
+    	    android:layout_alignBottom="@+id/txtRecallMinute"
+    	    android:layout_alignParentRight="true"
+    	    android:max="59"
+    	    android:progress="30"
+    	    />
+
+    	
+    
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="2dp" 
+        android:background="@android:color/white">
+        
+    </LinearLayout>
+
+	<Button
+	    android:id="@+id/btnRecallLater"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:text="Recall later"
+	    android:textStyle="bold" 
+	    android:textColor="@android:color/white"
+	    android:background="@android:color/holo_blue_light"/>
+
+</LinearLayout>

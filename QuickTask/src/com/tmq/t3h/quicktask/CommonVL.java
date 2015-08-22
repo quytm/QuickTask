@@ -3,12 +3,12 @@ package com.tmq.t3h.quicktask;
 import android.content.Context;
 import android.content.Intent;
 
+import com.tmq.t3h.quicktask.contact.BtnContact;
 import com.tmq.t3h.quicktask.message.BtnMessage;
 import com.tmq.t3h.quicktask.note.BtnNote;
+import com.tmq.t3h.quicktask.recall.BtnRecall;
 import com.tmq.t3h.quicktask.service.BtnClose;
-import com.tmq.t3h.quicktask.service.BtnContact;
 import com.tmq.t3h.quicktask.service.BtnOpen;
-import com.tmq.t3h.quicktask.service.BtnRecall;
 import com.tmq.t3h.quicktask.service.BtnRecord;
 
 public class CommonVL {
