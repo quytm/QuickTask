@@ -1,8 +1,8 @@
 package com.tmq.t3h.quicktask.mainui;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +14,32 @@ import android.widget.Toast;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.note.ListNoteAdapter;
 
-public class NoteFragment extends Fragment implements OnItemClickListener{
+public class NoteFragment extends android.support.v4.app.Fragment implements OnItemClickListener{
 	private static final String TAG = "NoteFragment";
 	private View mRootView;
 	private ListNoteAdapter adapter;
+	private Context mContext;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mRootView = inflater.inflate(R.layout.note_main_ui, null);
+		mContext = container.getContext();
 		initViews();
 		return mRootView;
 	}
 	
 	private void initViews(){
-		Log.i(TAG, "Start initView");
-		adapter = new ListNoteAdapter((MainUI) getActivity());
+		adapter = new ListNoteAdapter(mContext);
 		ListView listNote = (ListView) mRootView.findViewById(R.id.listNote);
 		listNote.setAdapter(adapter);
 		listNote.setOnItemClickListener(this);
-		Log.i(TAG, "Finish initview");
 	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Toast.makeText((MainUI) getActivity(), adapter.getItem(position), Toast.LENGTH_SHORT).show();
+		Toast.makeText(mContext, adapter.getItem(position), Toast.LENGTH_SHORT).show();
 	}
 	
 }

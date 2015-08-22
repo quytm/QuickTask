@@ -34,7 +34,6 @@ public class ListNoteAdapter extends BaseAdapter{
 			listNote.add(sharePref.getString(keyNote_+i, "null"));
 			Log.i(TAG, "Note_" + i + ": " + listNote.get(i-1));
 		}
-		Log.i(TAG, "Finish getNote");
 	}
 	
 	
@@ -55,13 +54,11 @@ public class ListNoteAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
-		Log.i(TAG, "getView.............");
 		if (view==null){
 			view = lf.inflate(R.layout.note_item_in_list, null);
 		}
 		TextView txtNote = (TextView) view.findViewById(R.id.txtNoteContent);
 		txtNote.setText(listNote.get(position));
-		Log.i(TAG, "finish getView.............");
 		return view;
 	}
 

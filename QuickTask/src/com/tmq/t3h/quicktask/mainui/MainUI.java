@@ -1,17 +1,19 @@
 package com.tmq.t3h.quicktask.mainui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.BtnOpen;
 
-public class MainUI extends Activity {
+public class MainUI extends FragmentActivity {
 	private static final String TAG = "MainUI";
-	private NoteFragment noteFragment = new NoteFragment();
+	
+	private ViewPager viewPager;
+	private AdapterForFragment adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,7 @@ public class MainUI extends Activity {
 		intent.setClass(this, BtnOpen.class);
 //		startService(intent);
 		
-		addAllFragments();
-//		showNoteFragment();
-		
+		initViews();
 	}
 
 	@Override
@@ -38,16 +38,11 @@ public class MainUI extends Activity {
 		return true;
 	}
 	
-	private void addAllFragments(){
-//		getFragmentManager().beginTransaction().add(noteFragment, "note_fragment").commit();
-		
-		getFragmentManager().beginTransaction().add(android.R.id.content, noteFragment, "note_fragment").commit();
-		Log.i(TAG, "finish commit fragment");
-	}
 	
-	private void showNoteFragment(){
-		Log.i(TAG, "commit Fragment");
-		getFragmentManager().beginTransaction().replace(android.R.id.content, noteFragment).commit();
+	private void initViews(){
+		adapter = new AdapterForFragment(getSupportFragmentManager());
+		viewPager = (ViewPager) findViewById(R.id.viewPageMain);
+		viewPager.setAdapter(adapter);
 	}
 
 }
