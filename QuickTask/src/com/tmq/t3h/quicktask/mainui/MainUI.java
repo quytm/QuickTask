@@ -26,7 +26,7 @@ public class MainUI extends FragmentActivity {
 //		startService(intent);
 		
 		intent.setClass(this, BtnOpen.class);
-//		startService(intent);
+		startService(intent);
 		
 		initViews();
 	}

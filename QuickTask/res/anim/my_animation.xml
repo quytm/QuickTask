@@ -18,6 +18,7 @@
 
 	<translate 	android:fromXDelta="-100%"
 	    		android:toXDelta="0%"
+	    		android:repeatCount="infinite"
 	    		android:interpolator="@android:anim/decelerate_interpolator"
 	    		/>
 </set>

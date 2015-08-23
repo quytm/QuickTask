@@ -2,6 +2,7 @@ package com.tmq.t3h.quicktask.note;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,13 +18,14 @@ import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
 
 public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTouchListener{
+	private static final String TAG = "NoteBox";
 	private EditText edtNoteContent;
 	private Button btnSaveNote;
 	
 	private float 	xDown, yDown,		// Luu vi tri cua ngon tay khi bat dau cham vao man hinh
 					xPre, yPre;			// Luu vi tri cua Layout khi bat dau cham vao man hinh
 	
-	SharedPreferences noteSharePref;
+	private SharedPreferences noteSharePref;
 	
 	@Override
 	protected int setIdLayout() {
@@ -36,6 +38,7 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		mParams.flags = LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
 						LayoutParams.FLAG_NOT_TOUCH_MODAL |
 						LayoutParams.FLAG_HARDWARE_ACCELERATED;
+		mParams.y = 100;
 	}
 
 	@Override
@@ -85,8 +88,13 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 	
 	private void saveNote(){
 		String content = edtNoteContent.getText().toString();
-		if (content==null || content=="") return;
-		noteSharePref = getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
+		Log.i(TAG, content);
+		if (content.length()==0){
+			Toast.makeText(this, "Textbox is empty", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+ 		noteSharePref = getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
 		
 		int numberNote = noteSharePref.getInt(CommonVL.NUMBER_NOTE, 0) + 1;
 		String keyNote = CommonVL.NOTE_ + numberNote;
@@ -99,5 +107,6 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		editor.commit();
 		
 		Toast.makeText(this, "Save note_" + numberNote + ": " + noteSharePref.getString(keyNote, "null"), Toast.LENGTH_SHORT).show();
+		
 	}
 }

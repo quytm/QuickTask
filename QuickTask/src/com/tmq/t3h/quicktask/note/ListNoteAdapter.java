@@ -27,7 +27,7 @@ public class ListNoteAdapter extends BaseAdapter{
 	
 	private void getAllNoteInSharePreferences(Context context){
 		SharedPreferences sharePref = 
-				context.getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, context.MODE_PRIVATE);
+				context.getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
 		int number = sharePref.getInt(CommonVL.NUMBER_NOTE, 0);
 		String keyNote_ = CommonVL.NOTE_;
 		for (int i=1; i<=number; i++){
