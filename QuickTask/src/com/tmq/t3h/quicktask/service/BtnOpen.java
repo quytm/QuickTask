@@ -7,8 +7,10 @@ import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.R;
+import com.tmq.t3h.quicktask.contact.BtnContact;
 import com.tmq.t3h.quicktask.message.BtnMessage;
 import com.tmq.t3h.quicktask.note.BtnNote;
+import com.tmq.t3h.quicktask.recall.BtnRecall;
 
 public class BtnOpen extends BtnComponent implements OnLongClickListener{
 
