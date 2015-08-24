@@ -5,10 +5,6 @@ import android.view.View;
 
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.R;
-import com.tmq.t3h.quicktask.contact.BtnContact;
-import com.tmq.t3h.quicktask.message.BtnMessage;
-import com.tmq.t3h.quicktask.note.BtnNote;
-import com.tmq.t3h.quicktask.recall.BtnRecall;
 
 public class BtnClose extends BtnComponent{
 
@@ -24,28 +20,15 @@ public class BtnClose extends BtnComponent{
 
 	@Override
 	public void onClick(View v) {
-//		Toast.makeText(this, "Close", Toast.LENGTH_SHORT).show();
 		// Stop all Button Service  
 		Intent intent = new Intent();
-		
-		intent.setClass(this, BtnOpen.class);
 		intent.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
 		intent.putExtra(CommonVL.PHONE_STATE, phoneState);
+		
+		intent.setClass(this, BtnOpen.class);
 		startService(intent);
 		
-		intent.setClass(this, BtnMessage.class);
-		stopService(intent);
-		
-		intent.setClass(this, BtnRecall.class);
-		stopService(intent);
-
-		intent.setClass(this, BtnNote.class);
-		stopService(intent);
-		
-		intent.setClass(this, BtnContact.class);
-		stopService(intent);
-		
-		intent.setClass(this, BtnRecord.class);
+		intent.setClass(this, MenuInCall.class);
 		stopService(intent);
 		
 		// Stop by Itself

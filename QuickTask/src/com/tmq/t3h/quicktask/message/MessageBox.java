@@ -58,7 +58,8 @@ public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener
 			@Override
 			public void onClick(View v) {
 				String content = edtWriteMessage.getText().toString();
-				sendMessage(content);
+				if (content.equals("")) Toast.makeText(v.getContext(), "Message is empty!", Toast.LENGTH_SHORT).show();
+				else sendMessage(content);
 			}
 		});
 	}
@@ -80,5 +81,11 @@ public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener
 		sms.sendTextMessage(phoneNumber, null, message, null, null);
 		Log.i(TAG, "Complete:\tPhone: " + phoneNumber + "\tMsg: " + message);
 		Toast.makeText(this, "Send SMS to " + phoneNumber + " complete!", Toast.LENGTH_SHORT).show();
+	}
+	
+	@Override
+	public void onDestroy() {
+		removeLayoutInScreen();
+		super.onDestroy();
 	}
 }

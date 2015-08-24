@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent" >
+
+    <Button
+        android:id="@+id/btnMessageNew"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/ico_message"/>
+    
+    <Button
+        android:id="@+id/btnRecallNew"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/ico_recall"/>
+    
+    <Button
+        android:id="@+id/btnNoteNew"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/ico_note"/>
+    
+    <Button
+        android:id="@+id/btnContactNew"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ico_contact"/>
+    
+    <Button
+        android:id="@+id/btnRecordNew"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/ico_record"/>
+    
+</FrameLayout>

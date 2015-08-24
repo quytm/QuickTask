@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 
 import com.tmq.t3h.quicktask.MyView;
@@ -26,6 +25,7 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 	private LayoutParams mParams;
 	
 	protected Button btnComponent;
+	protected boolean lockButton = false;
 	
 	protected String phoneNumber = "000 000 000";
 	protected String phoneState = "Idle Idle Idle";
@@ -54,16 +54,30 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 		btnComponent.setOnClickListener(this);
 		btnComponent.setBackgroundResource(setBackgroundComponent());
 		
+		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_in_bottom);
+		btnComponent.startAnimation(myAni);
+		
 		mWindow.addView(mView, mParams);
 		
 	}
+	//-----------------------------
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		if (mViewContainer!=null){
-			((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mViewContainer);
-			mViewContainer=null;
+			Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_bottom);
+			btnComponent.clearAnimation();
+			btnComponent.startAnimation(myAni);
+			
+			btnComponent.postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mViewContainer);
+					mViewContainer=null;
+				}
+			}, myAni.getDuration());
 		}
 	}
 	

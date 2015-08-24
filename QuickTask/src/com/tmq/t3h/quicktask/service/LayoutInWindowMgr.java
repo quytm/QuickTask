@@ -18,7 +18,8 @@ public abstract class LayoutInWindowMgr extends Service{
 	protected View mView;
 	protected LayoutParams mParams;
 	
-	protected String phoneNumber;
+	protected String phoneNumber = "000 000 000";
+	protected String phoneState = "Idle Idle Idle";
 
 	@Override
 	public void onCreate() {
@@ -47,22 +48,19 @@ public abstract class LayoutInWindowMgr extends Service{
 	}
 	
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (mViewContainer!=null){
-			((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mViewContainer);
-			mViewContainer=null;
-		}
-	}
-	
-	
-	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
 	
 	public void updateView(){
 		mWindow.updateViewLayout(mView, mParams);
+	}
+	
+	protected void removeLayoutInScreen(){
+		if (mViewContainer!=null){
+			((WindowManager) getSystemService(WINDOW_SERVICE)).removeView(mViewContainer);
+			mViewContainer=null;
+		}
 	}
 	
 //------------------------------------------------

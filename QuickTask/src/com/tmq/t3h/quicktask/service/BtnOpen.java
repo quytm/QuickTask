@@ -7,10 +7,6 @@ import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.R;
-import com.tmq.t3h.quicktask.contact.BtnContact;
-import com.tmq.t3h.quicktask.message.BtnMessage;
-import com.tmq.t3h.quicktask.note.BtnNote;
-import com.tmq.t3h.quicktask.recall.BtnRecall;
 
 public class BtnOpen extends BtnComponent implements OnLongClickListener{
 
@@ -45,19 +41,7 @@ public class BtnOpen extends BtnComponent implements OnLongClickListener{
 		intent.setClass(this, BtnClose.class);
 		startService(intent);
 		
-		intent.setClass(this, BtnMessage.class);
-		startService(intent);
-		
-		intent.setClass(this, BtnRecall.class);
-		startService(intent);
-		
-		intent.setClass(this, BtnNote.class);
-		startService(intent);
-		
-		intent.setClass(this, BtnContact.class);
-		startService(intent);
-		
-		intent.setClass(this, BtnRecord.class);
+		intent.setClass(this, MenuInCall.class);
 		startService(intent);
 		
 		// Stop by Itself

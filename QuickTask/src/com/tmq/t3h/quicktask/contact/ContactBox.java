@@ -31,9 +31,12 @@ public class ContactBox extends LayoutInWindowMgr{
 		adapter = new AdapterForContactList(this);
 		listContact = (ListView) mView.findViewById(R.id.listContact);
 		listContact.setAdapter(adapter);
-		
-		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.my_animation);
-		mView.startAnimation(myAni);
+	}
+	
+	@Override
+	public void onDestroy() {
+		removeLayoutInScreen();
+		super.onDestroy();
 	}
 
 }

@@ -80,4 +80,10 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	}
 
 	
+	@Override
+	public void onDestroy() {
+		removeLayoutInScreen();
+		super.onDestroy();
+	}
+	
 }

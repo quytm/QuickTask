@@ -109,4 +109,10 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		Toast.makeText(this, "Save note_" + numberNote + ": " + noteSharePref.getString(keyNote, "null"), Toast.LENGTH_SHORT).show();
 		
 	}
+	
+	@Override
+	public void onDestroy() {
+		removeLayoutInScreen();
+		super.onDestroy();
+	}
 }

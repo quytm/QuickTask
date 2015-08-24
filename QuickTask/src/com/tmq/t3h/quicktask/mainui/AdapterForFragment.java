@@ -1,7 +1,6 @@
 package com.tmq.t3h.quicktask.mainui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

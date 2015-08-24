@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Data;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,12 @@ public class AdapterForContactList extends BaseAdapter{
 	}
 	
 	private void getAllContactInDevice(){
-		Cursor contact = mContext.getContentResolver()
-				.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-		String name = "", number = "";
 		String indexName = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
 		String indexNumber = ContactsContract.CommonDataKinds.Phone.NUMBER;
+		Cursor contact = mContext.getContentResolver()
+			.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, Data.DISPLAY_NAME);
+		String name = "", number = "";
+		
 		while (contact.moveToNext()){
 			name = contact.getString(contact.getColumnIndex(indexName));
 			number = contact.getString(contact.getColumnIndex(indexNumber));

@@ -1,10 +1,5 @@
 package com.tmq.t3h.quicktask.service;
 
-import com.tmq.t3h.quicktask.MyView;
-import com.tmq.t3h.quicktask.R;
-import com.tmq.t3h.quicktask.R.id;
-import com.tmq.t3h.quicktask.R.layout;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -21,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tmq.t3h.quicktask.MyView;
+import com.tmq.t3h.quicktask.R;
 
 public class MyService extends Service implements OnClickListener, OnTouchListener{
 	private static final String TAG = "MyService...";
