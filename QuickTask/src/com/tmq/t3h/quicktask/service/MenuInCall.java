@@ -16,6 +16,7 @@ import com.tmq.t3h.quicktask.contact.ContactBox;
 import com.tmq.t3h.quicktask.message.MessageBox;
 import com.tmq.t3h.quicktask.note.NoteBox;
 import com.tmq.t3h.quicktask.recall.RecallLaterBox;
+import com.tmq.t3h.quicktask.record.RecordBox;
 
 public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	private static final String TAG = "MenuInCall";
@@ -27,7 +28,7 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 					btnRecord;
 	
 	private int boxIsShow = CommonVL.BOX_NOT_SHOWED;
-
+	
 	@Override
 	protected int setIdLayout() {
 		return R.layout.menu_in_call;
@@ -101,7 +102,8 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				boxIsShow = CommonVL.CONTACT_BOX_SHOWED;
 				break;
 			case R.id.btnRecordNew:
-				Toast.makeText(this, "Record", Toast.LENGTH_SHORT).show();
+				RecordBox.startRecord();
+				Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
 				boxIsShow = CommonVL.RECORD_BOX_SHOWED;
 				break;
 		}
@@ -132,8 +134,9 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				intent.setClass(this, ContactBox.class);
 				break;
 			case CommonVL.RECORD_BOX_SHOWED:
-//				valueReturn = CommonVL.RECALL_BOX_SHOWED;
-	//			intent.setClass(this, .class);
+				RecordBox.stopRecord();
+				Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
+				valueReturn = CommonVL.RECORD_BOX_SHOWED;
 				break;
 		}
 		stopService(intent);
