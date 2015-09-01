@@ -1,7 +1,5 @@
 package com.tmq.t3h.quicktask.note;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -13,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.tmq.t3h.quicktask.CommonVL;
+import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
 
@@ -24,8 +22,6 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 	
 	private float 	xDown, yDown,		// Luu vi tri cua ngon tay khi bat dau cham vao man hinh
 					xPre, yPre;			// Luu vi tri cua Layout khi bat dau cham vao man hinh
-	
-	private SharedPreferences noteSharePref;
 	
 	@Override
 	protected int setIdLayout() {
@@ -94,20 +90,9 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 			return;
 		}
 		
- 		noteSharePref = getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
-		
-		int numberNote = noteSharePref.getInt(CommonVL.NUMBER_NOTE, 0) + 1;
-		String keyNote = CommonVL.NOTE_ + numberNote;
-		
-		SharedPreferences.Editor editor = noteSharePref.edit();
-		editor.putString(keyNote, content);
-		editor.remove(CommonVL.NUMBER_NOTE);
-		editor.putInt(CommonVL.NUMBER_NOTE, numberNote);
-		
-		editor.commit();
-		
-		Toast.makeText(this, "Save note_" + numberNote + ": " + noteSharePref.getString(keyNote, "null"), Toast.LENGTH_SHORT).show();
-		
+		DataContactSharedPref saveNote = new DataContactSharedPref(this);
+		saveNote.putData("null", "null", content, "null", -1);
+		Toast.makeText(this, "Note is saved: " + content, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override

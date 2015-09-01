@@ -3,15 +3,13 @@ package com.tmq.t3h.quicktask.note;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tmq.t3h.quicktask.CommonVL;
+import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 
 public class ListNoteAdapter extends BaseAdapter{
@@ -26,13 +24,14 @@ public class ListNoteAdapter extends BaseAdapter{
 	}
 	
 	private void getAllNoteInSharePreferences(Context context){
-		SharedPreferences sharePref = 
-				context.getSharedPreferences(CommonVL.NOTE_SHAREPREFERENCES, Context.MODE_PRIVATE);
-		int number = sharePref.getInt(CommonVL.NUMBER_NOTE, 0);
-		String keyNote_ = CommonVL.NOTE_;
-		for (int i=1; i<=number; i++){
-			listNote.add(sharePref.getString(keyNote_+i, "null"));
-			Log.i(TAG, "Note_" + i + ": " + listNote.get(i-1));
+		DataContactSharedPref dataContact = new DataContactSharedPref(context);
+		int size = dataContact.sizeOfDataContact();
+		DataContactSharedPref.DataItem item;
+		for (int i=1; i<=size; i++){
+			item = dataContact.getData(i);
+			if (!item.note.equals("null")){
+				listNote.add(item.note);
+			}
 		}
 	}
 	
