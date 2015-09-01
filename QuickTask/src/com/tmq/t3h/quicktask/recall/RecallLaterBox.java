@@ -1,5 +1,12 @@
 package com.tmq.t3h.quicktask.recall;
 
+import java.util.Calendar;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +18,8 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tmq.t3h.quicktask.CommonVL;
+import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
 
@@ -21,6 +30,8 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	private TextView txtAmountOfHour, txtAmountOfMinute;
 	private SeekBar sbrHour, sbrMinute;
 	private Button btnRecallLater;
+	
+	private SharedPreferences recallSharedPref;
 
 	@Override
 	protected int setIdLayout() {
@@ -53,9 +64,10 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	
 	@Override
 	public void onClick(View v) {
-		Toast.makeText(this, 
-				"Recall later: " + txtAmountOfHour.getText() + "h " + txtAmountOfMinute.getText() + "m.", 
-				Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, 
+//				"Recall later: " + txtAmountOfHour.getText() + "h " + txtAmountOfMinute.getText() + "m.", 
+//				Toast.LENGTH_SHORT).show();
+		setTimeToRemine();
 	}
 
 	@Override
@@ -84,6 +96,37 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	public void onDestroy() {
 		removeLayoutInScreen();
 		super.onDestroy();
+	}
+	
+	
+	private void setTimeToRemine(){
+		Calendar calendar = Calendar.getInstance();
+		int minutes = calendar.get(Calendar.MINUTE);
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		
+		int minutesRemine = ( minutes + sbrMinute.getProgress() ) % 60;
+		int hoursRemine = ( hours + (minutes + sbrMinute.getProgress()) / 60 ) % 24;
+		Toast.makeText(this, hoursRemine + "h : " + minutesRemine + "min", Toast.LENGTH_SHORT).show();
+
+		calendar.set(Calendar.HOUR_OF_DAY, hoursRemine);
+		calendar.set(Calendar.MINUTE, minutesRemine);
+		calendar.set(Calendar.SECOND, 0);
+		
+		int id = saveToSharedPref(hoursRemine, minutesRemine);
+		
+		Intent myIntent = new Intent(this, RemineRecallLater.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, myIntent,0);
+
+		AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+		alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+	}
+	
+	private int saveToSharedPref(int h, int min){
+		String time = h + "h : " + min + "min";
+		int id = (int)System.currentTimeMillis();
+		DataContactSharedPref saveTimeRecall = new DataContactSharedPref(this);
+		saveTimeRecall.putData("null", "null", "null", time, id);
+		return id;
 	}
 	
 }
