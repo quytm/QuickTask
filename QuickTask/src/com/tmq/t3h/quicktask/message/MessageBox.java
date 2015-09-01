@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
+import com.tmq.t3h.quicktask.service.MenuInCall;
 
 public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener{
 	
@@ -81,6 +82,10 @@ public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener
 		sms.sendTextMessage(phoneNumber, null, message, null, null);
 		Log.i(TAG, "Complete:\tPhone: " + phoneNumber + "\tMsg: " + message);
 		Toast.makeText(this, "Send SMS to " + phoneNumber + " complete!", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, MenuInCall.class);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		startService(intent);
+		stopSelf();
 	}
 	
 	@Override

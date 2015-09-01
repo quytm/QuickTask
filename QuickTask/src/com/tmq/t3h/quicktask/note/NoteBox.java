@@ -1,5 +1,6 @@
 package com.tmq.t3h.quicktask.note;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -11,9 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
+import com.tmq.t3h.quicktask.service.MenuInCall;
 
 public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTouchListener{
 	private static final String TAG = "NoteBox";
@@ -54,12 +57,15 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		// if Click then NoteContent will be save in SharePreferent
 		switch (v.getId()) {
 		case R.id.btnCloseNote:
-			stopSelf();
 			break;
 		case R.id.btnSaveNote:
-			saveNote();
+			if (!saveNote()) return;	// If note is not saved, function will be exit, then NoteBox is not destroyed
 			break;
 		}
+		Intent intent = new Intent(this, MenuInCall.class);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		startService(intent);
+		stopSelf();	// Hide NoteBox (Destroy)
 	}
 	
 	
@@ -82,17 +88,18 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		return true;
 	}
 	
-	private void saveNote(){
+	private boolean saveNote(){
 		String content = edtNoteContent.getText().toString();
 		Log.i(TAG, content);
 		if (content.length()==0){
 			Toast.makeText(this, "Textbox is empty", Toast.LENGTH_SHORT).show();
-			return;
+			return false;		// Note is not saved 
 		}
 		
 		DataContactSharedPref saveNote = new DataContactSharedPref(this);
 		saveNote.putData("null", "null", content, "null", -1);
 		Toast.makeText(this, "Note is saved: " + content, Toast.LENGTH_SHORT).show();
+		return true;			// Note is saved
 	}
 	
 	@Override

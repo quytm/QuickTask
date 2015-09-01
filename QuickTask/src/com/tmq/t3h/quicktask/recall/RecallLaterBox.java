@@ -22,6 +22,7 @@ import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.LayoutInWindowMgr;
+import com.tmq.t3h.quicktask.service.MenuInCall;
 
 public class RecallLaterBox extends LayoutInWindowMgr implements
 																OnClickListener, 
@@ -68,6 +69,10 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 //				"Recall later: " + txtAmountOfHour.getText() + "h " + txtAmountOfMinute.getText() + "m.", 
 //				Toast.LENGTH_SHORT).show();
 		setTimeToRemine();
+		Intent intent = new Intent(this, MenuInCall.class);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		startService(intent);
+		stopSelf();
 	}
 
 	@Override

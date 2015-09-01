@@ -182,7 +182,7 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
 		phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
-		
+		boxIsShow = intent.getIntExtra(CommonVL.NOTI_STATE_BOX, -1);
 		return super.onStartCommand(intent, flags, startId);
 	}
 

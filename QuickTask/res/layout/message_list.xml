@@ -2,43 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:padding="2dp"
+    android:background="@android:color/holo_blue_light">
 
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_layout" >
+        android:gravity="center_vertical"
+        android:background="@android:color/white" >
 
         <EditText
             android:id="@+id/edtWriteMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:layout_weight="1"
             android:background="@android:color/white"
             android:hint="Message..."
             android:minHeight="40dp"
             android:textColor="@android:color/black"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnSendMessage"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginRight="4dp"
             android:background="@drawable/ico_btn_send_message"/>
     </LinearLayout>
+    
     
     <ListView
         android:id="@+id/listMessage"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:divider="@drawable/divider_listview" >
+        android:layout_marginTop="2dp"
+        android:divider="@drawable/divider_listview" 
+        android:background="@android:color/white">
     </ListView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/divider_listview" />
-
-    
 
 </LinearLayout>

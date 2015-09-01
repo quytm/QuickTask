@@ -13,6 +13,9 @@ public class CommonVL {
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
 	public static final String PHONE_STATE = "quicktask.phone_state";
 	
+	
+	// SharedPreferences
+	public static final int NUMBER_DATA_CONTACT_MAX = 999;
 	public static final String NOTE_RECALL_SHAREPREFERENCES = "data_note_recall_sharepreferences";
 	public static final String DATA_CONTACT_SHAREPREFERENCES = "data_contact_recall_sharepreferences";
 	
@@ -23,14 +26,6 @@ public class CommonVL {
 	public static final String CONTACT_TIME_START_ 	= "contact_time_start";
 	public static final String CONTACT_RECALL_ID_ 	= "contact_recall_id";
 	
-	public static final String NUMBER_NOTE = "number_note";
-	public static final String NOTE_ = "note_";
-	
-	public static final String NUMBER_RECALL = "number_recall";
-	public static final String RECALL_ = "recall_";
-	
-	
-	
 	// State of box
 	public static final int BOX_NOT_SHOWED 		= 0;
 	public static final int MESSAGE_BOX_SHOWED 	= 1;
@@ -38,7 +33,12 @@ public class CommonVL {
 	public static final int NOTE_BOX_SHOWED 	= 3;
 	public static final int CONTACT_BOX_SHOWED 	= 4;
 	public static final int RECORD_BOX_SHOWED 	= 5;
-	public static final int NUMBER_DATA_CONTACT_MAX = 999;
+	public static final String NOTI_STATE_BOX	= "notification_state_of_box";
+	
+	
+	
+	
+	
 	
 	
 	public static void stopAllService(Context context) {
