@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Data;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.service.BtnOpen;
@@ -94,7 +95,13 @@ public class MyCallReceiver extends BroadcastReceiver {
 		Cursor contact = context.getContentResolver()
 				.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, selection, null, Data.DISPLAY_NAME);
 		contact.moveToFirst();
+		
+		if (contact.getCount()==0) {
+			Toast.makeText(context, "Phone is not in Contact", Toast.LENGTH_SHORT).show();
+			phoneDisplayName = CommonVL.CONTACT_IS_NOT_IN_DEVICE;
+			return;
+		}
 		phoneDisplayName = contact.getString(contact.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-//		Toast.makeText(context, "Name phone is " + name, Toast.LENGTH_SHORT).show();
+//		Toast.makeText(context, "Name phone is " + phoneDisplayName, Toast.LENGTH_SHORT).show();
 	}
 }

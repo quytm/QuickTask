@@ -14,6 +14,7 @@ public class CommonVL {
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
 	public static final String PHONE_STATE = "quicktask.phone_state";
 	public static final String PHONE_DISPLAY_NAME = "quicktack.phone_display_name";
+	public static final String CONTACT_IS_NOT_IN_DEVICE = "contact_is_not_in_device";
 	
 	
 	// SharedPreferences
