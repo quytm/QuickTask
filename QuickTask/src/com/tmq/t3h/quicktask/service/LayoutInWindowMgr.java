@@ -20,6 +20,7 @@ public abstract class LayoutInWindowMgr extends Service{
 	
 	protected String phoneNumber = "000 000 000";
 	protected String phoneState = "Idle Idle Idle";
+	protected String phoneDisplayName = "No name";
 
 	@Override
 	public void onCreate() {

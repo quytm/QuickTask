@@ -37,6 +37,7 @@ public class BtnOpen extends BtnComponent implements OnLongClickListener{
 		Intent intent = new Intent();
 		intent.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
 		intent.putExtra(CommonVL.PHONE_STATE, phoneState);
+		intent.putExtra(CommonVL.PHONE_DISPLAY_NAME, phoneDisplayName);
 		
 		intent.setClass(this, BtnClose.class);
 		startService(intent);
@@ -59,6 +60,7 @@ public class BtnOpen extends BtnComponent implements OnLongClickListener{
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
 		phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
+		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
 		if (phoneNumber==null) phoneNumber = "000 000 000";
 		if (phoneState==null) phoneState = "Idle Idle Idle";
 		return super.onStartCommand(intent, flags, startId);

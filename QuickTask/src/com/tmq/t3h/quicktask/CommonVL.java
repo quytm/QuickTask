@@ -10,8 +10,10 @@ import com.tmq.t3h.quicktask.service.BtnOpen;
 
 public class CommonVL {
 
+	// Phone Call
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
 	public static final String PHONE_STATE = "quicktask.phone_state";
+	public static final String PHONE_DISPLAY_NAME = "quicktack.phone_display_name";
 	
 	
 	// SharedPreferences

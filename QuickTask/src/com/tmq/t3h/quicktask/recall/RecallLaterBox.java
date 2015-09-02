@@ -4,9 +4,7 @@ import java.util.Calendar;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -32,8 +30,6 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	private SeekBar sbrHour, sbrMinute;
 	private Button btnRecallLater;
 	
-	private SharedPreferences recallSharedPref;
-
 	@Override
 	protected int setIdLayout() {
 		Log.i(TAG, "setLayout");
@@ -65,12 +61,10 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	
 	@Override
 	public void onClick(View v) {
-//		Toast.makeText(this, 
-//				"Recall later: " + txtAmountOfHour.getText() + "h " + txtAmountOfMinute.getText() + "m.", 
-//				Toast.LENGTH_SHORT).show();
 		setTimeToRemine();
+		
 		Intent intent = new Intent(this, MenuInCall.class);
-		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, CommonVL.BOX_NOT_SHOWED);
 		startService(intent);
 		stopSelf();
 	}
@@ -130,8 +124,17 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 		String time = h + "h : " + min + "min";
 		int id = (int)System.currentTimeMillis();
 		DataContactSharedPref saveTimeRecall = new DataContactSharedPref(this);
-		saveTimeRecall.putData("null", "null", "null", time, id);
+		Toast.makeText(this, "save: " + time, Toast.LENGTH_SHORT).show();
+		saveTimeRecall.putData(phoneDisplayName, phoneNumber, "null", time, id);
 		return id;
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
+		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		
+		return super.onStartCommand(intent, flags, startId);
 	}
 	
 }

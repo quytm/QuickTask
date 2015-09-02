@@ -43,6 +43,7 @@ public class MainUI extends FragmentActivity {
 		adapter = new AdapterForFragment(getSupportFragmentManager());
 		viewPager = (ViewPager) findViewById(R.id.viewPageMain);
 		viewPager.setAdapter(adapter);
+		viewPager.setCurrentItem(0);
 	}
 
 }

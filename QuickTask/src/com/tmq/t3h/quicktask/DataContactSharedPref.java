@@ -41,11 +41,11 @@ public class DataContactSharedPref {
 		
 		
 		// If save Note
-		if (note!=null) {
+		if (!note.equals("null")) {
 			editor.putString(CommonVL.CONTACT_NOTE_ 		+ indexOfContact, note);
 		}
 		// If save Recall Later
-		else if (recallTime!=null){
+		else if (!recallTime.equals("null")){
 			editor.putInt(CommonVL.CONTACT_RECALL_ID_		+ indexOfContact, recallId);
 			editor.putString(CommonVL.CONTACT_TIME_START_ 	+ indexOfContact, recallTime);
 		}

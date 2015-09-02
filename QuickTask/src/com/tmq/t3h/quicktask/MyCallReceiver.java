@@ -1,15 +1,16 @@
 package com.tmq.t3h.quicktask;
 import java.util.Date;
 
-import com.tmq.t3h.quicktask.service.BtnOpen;
-import com.tmq.t3h.quicktask.service.MyService;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.Data;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.tmq.t3h.quicktask.service.BtnOpen;
 
 
 public class MyCallReceiver extends BroadcastReceiver {
@@ -21,6 +22,7 @@ public class MyCallReceiver extends BroadcastReceiver {
 	private static Date timeStartCall;
 	private static boolean isIncoming;
 	private static String phoneNumber = null;
+	private static String phoneDisplayName = null;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -48,6 +50,10 @@ public class MyCallReceiver extends BroadcastReceiver {
 	private void onNewOutGoingCall(Context context, Intent intent){
 		currentState = Intent.ACTION_NEW_OUTGOING_CALL;
 		phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
+		
+		confirmContactInAddressBook(context);
+		
+		intentSend.putExtra(CommonVL.PHONE_DISPLAY_NAME, phoneDisplayName);
 		intentSend.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
 		intentSend.putExtra(CommonVL.PHONE_STATE, currentState);
 		context.startService(intentSend);
@@ -56,6 +62,10 @@ public class MyCallReceiver extends BroadcastReceiver {
 	private void onRinging(Context context, Intent intent){
 		currentState = TelephonyManager.EXTRA_STATE_RINGING;
 		phoneNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+		
+		confirmContactInAddressBook(context);
+		
+		intentSend.putExtra(CommonVL.PHONE_DISPLAY_NAME, phoneDisplayName);
 		intentSend.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
 		intentSend.putExtra(CommonVL.PHONE_STATE, currentState);
 		context.startService(intentSend);
@@ -73,66 +83,18 @@ public class MyCallReceiver extends BroadcastReceiver {
 		CommonVL.stopAllService(context);
 		context.startService(intentSend);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@Override
-//	public void onReceive(Context context, Intent intent) {
-//		Intent intentSend = new Intent();
-//        intentSend.setClass(context, MyService.class);
-//		if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(
-//				TelephonyManager.EXTRA_STATE_RINGING)) {
-//             
-//            // get the phone number 
-////            String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
-////            Toast.makeText(context, "Call from:" +incomingNumber, Toast.LENGTH_LONG).show();
-//            
-//            context.startService(intentSend);
-//        } else if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(
-//        		TelephonyManager.EXTRA_STATE_IDLE) 
-//        		|| intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(
-//        		TelephonyManager.EXTRA_STATE_OFFHOOK)) {
-//            // This code will execute when the call is disconnected
-//            Toast.makeText(context, "Detected call hangup event", Toast.LENGTH_LONG).show();
-//            context.stopService(intentSend);
-//        }
-//	}
 
+	private void confirmContactInAddressBook(Context context){
+		if (phoneNumber==null) {
+			Toast.makeText(context, "phoneNumber is null", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		String selection = ContactsContract.CommonDataKinds.Phone.NUMBER + 
+							" = '" + phoneNumber + "'";
+		Cursor contact = context.getContentResolver()
+				.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, selection, null, Data.DISPLAY_NAME);
+		contact.moveToFirst();
+		phoneDisplayName = contact.getString(contact.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+//		Toast.makeText(context, "Name phone is " + name, Toast.LENGTH_SHORT).show();
+	}
 }

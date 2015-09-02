@@ -68,6 +68,7 @@ public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
+		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -82,8 +83,9 @@ public class MessageBox extends LayoutInWindowMgr implements OnItemClickListener
 		sms.sendTextMessage(phoneNumber, null, message, null, null);
 		Log.i(TAG, "Complete:\tPhone: " + phoneNumber + "\tMsg: " + message);
 		Toast.makeText(this, "Send SMS to " + phoneNumber + " complete!", Toast.LENGTH_SHORT).show();
+		
 		Intent intent = new Intent(this, MenuInCall.class);
-		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, CommonVL.BOX_NOT_SHOWED);
 		startService(intent);
 		stopSelf();
 	}

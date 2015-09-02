@@ -63,7 +63,7 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 			break;
 		}
 		Intent intent = new Intent(this, MenuInCall.class);
-		intent.putExtra(CommonVL.NOTI_STATE_BOX, true);
+		intent.putExtra(CommonVL.NOTI_STATE_BOX, CommonVL.BOX_NOT_SHOWED);
 		startService(intent);
 		stopSelf();	// Hide NoteBox (Destroy)
 	}
@@ -100,6 +100,13 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 		saveNote.putData("null", "null", content, "null", -1);
 		Toast.makeText(this, "Note is saved: " + content, Toast.LENGTH_SHORT).show();
 		return true;			// Note is saved
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
+		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		return super.onStartCommand(intent, flags, startId);
 	}
 	
 	@Override
