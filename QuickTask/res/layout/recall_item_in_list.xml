@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/imgIconItemRecall"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ico_recall" />
+    
+    <TextView
+        android:id="@+id/txtRecallPhoneName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imgIconItemRecall"
+        android:layout_marginLeft="10dp"
+        android:text="Phone Name" 
+        android:textSize="20sp"/>
+    
+    <TextView 
+        android:id="@+id/txtRecallPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/txtRecallPhoneName"
+        android:layout_alignBaseline="@+id/txtRecallPhoneName"
+        android:layout_marginLeft="10dp"
+        android:text="000 000 000"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/txtRecallTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imgIconItemRecall"
+        android:layout_alignBottom="@+id/imgIconItemRecall"
+        android:layout_marginLeft="10dp"
+        android:text="Recall time" 
+        android:textSize="15sp"/>
+
+</RelativeLayout>
