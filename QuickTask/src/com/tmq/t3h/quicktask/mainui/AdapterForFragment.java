@@ -12,10 +12,10 @@ public class AdapterForFragment extends FragmentPagerAdapter{
 	public AdapterForFragment(FragmentManager fm) {
 		super(fm);
 		listFragment = new ArrayList<Fragment>();
-		listFragment.add((NoteFragment)(new NoteFragment()));
-		listFragment.add((RecallFragment)(new RecallFragment()));
-		listFragment.add((NoteFragment)(new NoteFragment()));
-		listFragment.add((RecallFragment)(new RecallFragment()));
+//		listFragment.add((NoteFragment)(new NoteFragment()));
+//		listFragment.add((RecallFragment)(new RecallFragment()));
+//		listFragment.add((NoteFragment)(new NoteFragment()));
+//		listFragment.add((RecallFragment)(new RecallFragment()));
 	}
 	
 

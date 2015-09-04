@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/MyTheme.ActionBar.Background</item>
+	    <item name="android:actionBarTabBarStyle">@style/MyTheme.ActionBar.TabBar</item>
+	    <item name="android:actionBarTabStyle">@style/MyTheme.ActionBar.TabView</item>
+	    <item name="android:actionBarTabTextStyle">@style/MyTheme.ActionBar.TabText</item>
+	</style>
+	
+    <style name="MyTheme.ActionBar.Background" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@android:color/holo_blue_light</item>
+    </style>
+
+	<style name="MyTheme.ActionBar.TabBar" parent="android:style/Widget.Holo.Light.ActionBar.TabBar">
+	    <item name="android:background">@android:color/white</item>
+	</style>
+	
+	<style name="MyTheme.ActionBar.TabView" parent="android:style/Widget.Holo.ActionBar.TabView">
+	    <item name="android:background">@drawable/actionbar_tab_indicator</item>
+	</style>
+	
+	<style name="MyTheme.ActionBar.TabText" parent="android:style/Widget.Holo.ActionBar.TabText">
+	    <item name="android:textColor">@android:color/white</item>
+	</style>
+</resources>

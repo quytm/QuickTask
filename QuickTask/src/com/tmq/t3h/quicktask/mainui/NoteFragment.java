@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.note.ListNoteAdapter;
 
-public class NoteFragment extends android.support.v4.app.Fragment implements OnItemClickListener{
+public class NoteFragment extends Fragment implements OnItemClickListener{
 	private static final String TAG = "NoteFragment";
 	private View mRootView;
 	private ListNoteAdapter adapter;
