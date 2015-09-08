@@ -2,17 +2,19 @@ package com.tmq.t3h.quicktask;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class DataContactSharedPref {
+	private static final String TAG = "DataContactSharedPref";
 	private SharedPreferences dataContact;
 	
 	public class DataItem{
-		public String 	name,
-						number,
-						note,
-						recallTime;
-		public int	 	recallId,
-						position;
+		public String 	name,			// Name Contact
+						number,			// PhoneNumber of Contact
+						note,			// Note is saved
+						recallTime;		// Time save/Time remine
+		public int	 	recallId,		// Id when start alarm remine
+						position;		// position in SharedPreferences
 		public DataItem(String name, String number, String note, 
 						String recallTime, int id, int pos) {
 			this.name 	= name;
@@ -38,16 +40,17 @@ public class DataContactSharedPref {
 		
 		editor.putString(CommonVL.CONTACT_NAME_			+ indexOfContact, name);
 		editor.putString(CommonVL.CONTACT_PHONE_NUMBER_ + indexOfContact, number);
-		
+		editor.putString(CommonVL.CONTACT_TIME_START_ 	+ indexOfContact, recallTime);
 		
 		// If save Note
 		if (!note.equals("null")) {
-			editor.putString(CommonVL.CONTACT_NOTE_ 		+ indexOfContact, note);
+			editor.putString(CommonVL.CONTACT_NOTE_ 	+ indexOfContact, note);
+			editor.putInt(CommonVL.CONTACT_RECALL_ID_	+ indexOfContact, -1);
 		}
 		// If save Recall Later
-		else if (!recallTime.equals("null")){
-			editor.putInt(CommonVL.CONTACT_RECALL_ID_		+ indexOfContact, recallId);
-			editor.putString(CommonVL.CONTACT_TIME_START_ 	+ indexOfContact, recallTime);
+		else {
+			editor.putInt(CommonVL.CONTACT_RECALL_ID_	+ indexOfContact, recallId);
+			editor.putString(CommonVL.CONTACT_NOTE_ 	+ indexOfContact, "null");
 		}
 		
 		editor.remove(CommonVL.NUMBER_DATA_CONTACT);
@@ -70,6 +73,76 @@ public class DataContactSharedPref {
 	}
 	
 	public void removeData(int position){
+		int size = sizeOfDataContact();
 		
+		// Out of bound
+		if (position>size || position<1) {
+//			Log.i(TAG, "out of bound " + position);
+			return;
+		}
+		
+		// If data is Note and Recall -> Set note="null"
+		if (getData(position).recallId != -1) {
+			setNoteDataAt(position, "null");
+//			Log.i(TAG, "data is recall " + position);
+			return;
+		}
+		
+		// If data is Note
+		for (int i=position; i<size; i++){
+			deleteDataAt(i);
+			setDataAt(i, getData(i+1));
+		}
+		deleteDataAt(size);
+		// Size = Size-1
+		SharedPreferences.Editor editor = dataContact.edit();
+		editor.remove(CommonVL.NUMBER_DATA_CONTACT);
+		editor.putInt(CommonVL.NUMBER_DATA_CONTACT, size-1);
+		editor.commit();
+	}
+	
+	private void deleteDataAt(int position){
+		SharedPreferences.Editor editor = dataContact.edit();
+		
+		// remove
+		editor.remove(CommonVL.CONTACT_NAME_		+ position);
+		editor.remove(CommonVL.CONTACT_PHONE_NUMBER_+ position);
+		editor.remove(CommonVL.CONTACT_TIME_START_ 	+ position);
+		editor.remove(CommonVL.CONTACT_NOTE_ 		+ position);
+		editor.remove(CommonVL.CONTACT_RECALL_ID_	+ position);
+		
+		editor.commit();
+		
+//		Log.i(TAG, "delete at " + position);
+	}
+	
+	private void setDataAt(int position, DataItem item){
+		deleteDataAt(position);
+		SharedPreferences.Editor editor = dataContact.edit();
+		
+		editor.putString(CommonVL.CONTACT_NAME_			+ position, item.name);
+		editor.putString(CommonVL.CONTACT_PHONE_NUMBER_ + position, item.number);
+		editor.putString(CommonVL.CONTACT_TIME_START_ 	+ position, item.recallTime);
+		editor.putString(CommonVL.CONTACT_NOTE_ 		+ position, item.note);
+		editor.putInt(CommonVL.CONTACT_RECALL_ID_		+ position, item.recallId);
+		
+		editor.commit();
+		
+//		Log.i(TAG, "setData at " + position);
+	}
+	
+	public void setNoteDataAt(int position, String newNote){
+		DataItem item = getData(position);
+		if (item.note.equals("null")) return;
+		else{
+			SharedPreferences.Editor editor = dataContact.edit();
+			
+			editor.remove(CommonVL.CONTACT_NOTE_ 	+ position);
+			editor.putString(CommonVL.CONTACT_NOTE_ + position, newNote);
+			
+			editor.commit();
+		}
+		
+//		Log.i(TAG, "setNote at " + position + ", newNode = " + newNote);
 	}
 }

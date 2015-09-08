@@ -3,6 +3,7 @@ package com.tmq.t3h.quicktask.note;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class ListNoteAdapter extends BaseAdapter{
 		for (int i=1; i<=size; i++){
 			item = dataContact.getData(i);
 			if (!item.note.equals("null")){
+				Log.i(TAG, "note " + i + " = " + item.note + ", id = " + item.recallId);
 				listNote.add(item);
 			}
 		}

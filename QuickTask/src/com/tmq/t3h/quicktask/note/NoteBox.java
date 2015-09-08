@@ -1,5 +1,7 @@
 package com.tmq.t3h.quicktask.note;
 
+import java.util.Calendar;
+
 import android.content.Intent;
 import android.util.Log;
 import android.view.Gravity;
@@ -96,8 +98,13 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 			return false;		// Note is not saved 
 		}
 		
+		
+		Calendar calendar = Calendar.getInstance();
+		int minutes = calendar.get(Calendar.MINUTE);
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		String time = (hours>9?hours:"0"+hours) + " : " + (minutes>9?minutes:"0"+minutes);
 		DataContactSharedPref saveNote = new DataContactSharedPref(this);
-		saveNote.putData("null", "null", content, "null", -1);
+		saveNote.putData(phoneDisplayName, phoneNumber, content, time, -1);
 		Toast.makeText(this, "Note is saved: " + content, Toast.LENGTH_SHORT).show();
 		return true;			// Note is saved
 	}
