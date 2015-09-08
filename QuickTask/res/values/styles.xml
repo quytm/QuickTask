@@ -17,4 +17,15 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    
+	<!--     Animation for dialog -->
+	<style name="PauseDialog" parent="@android:style/Theme.Holo.Dialog.NoActionBar">
+    	<item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
+	</style>
+
+	<style name="PauseDialogAnimation">
+    	<item name="android:windowEnterAnimation">@anim/anim_slide_in_bottom</item>
+    	<item name="android:windowExitAnimation">@anim/anim_slide_out_bottom</item>
+	</style>
+    
 </resources>

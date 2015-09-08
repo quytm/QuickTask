@@ -4,6 +4,7 @@ import android.view.Gravity;
 import android.view.WindowManager.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ListView;
 
 import com.tmq.t3h.quicktask.R;
@@ -31,6 +32,11 @@ public class ContactBox extends LayoutInWindowMgr{
 		adapter = new AdapterForContactList(this);
 		listContact = (ListView) mView.findViewById(R.id.listContact);
 		listContact.setAdapter(adapter);
+		
+		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_in_bottom);
+//		listContact.startAnimation(myAni);
+		mView.startAnimation(myAni);
+		
 	}
 	
 	@Override

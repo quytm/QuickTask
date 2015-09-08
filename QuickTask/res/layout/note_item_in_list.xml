@@ -1,26 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RelativeLayout1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:id="@+id/imgIconItemNote"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ico_note_item" />
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ico_note" />
 
-    <TextView
-        android:id="@+id/txtNoteContent"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/imgIconItemNote"
         android:layout_marginLeft="10dp"
-        android:text="This is a first Note in my applicatin!" 
-        android:textSize="20sp"/>
+        android:orientation="vertical" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtNoteContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is a first Note in my applicatin!"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/txtNoteItemContact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="01693227489"
+                android:textColor="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/txtNoteItemTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="11:05"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
