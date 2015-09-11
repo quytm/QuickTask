@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" 
@@ -7,21 +8,19 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ico_note_blue" />
-    
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ico_record" />
+
     <TextView
-        android:id="@+id/txtContentMsg"
+        android:id="@+id/txtRecordNameFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="15dp"
-        android:text="Message" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Name" 
         android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:background="@android:color/white"
-        />
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>

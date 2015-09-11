@@ -2,8 +2,12 @@ package com.tmq.t3h.quicktask;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.tmq.t3h.quicktask.service.BtnClose;
 import com.tmq.t3h.quicktask.service.BtnOpen;
@@ -14,7 +18,7 @@ public class CommonVL {
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
 	public static final String PHONE_STATE = "quicktask.phone_state";
 	public static final String PHONE_DISPLAY_NAME = "quicktack.phone_display_name";
-	public static final String CONTACT_IS_NOT_IN_DEVICE = "contact_is_not_in_device";
+	public static final String CONTACT_IS_NOT_IN_DEVICE = "null";
 	
 	
 	// SharedPreferences
@@ -39,10 +43,14 @@ public class CommonVL {
 	public static final String NOTI_STATE_BOX	= "notification_state_of_box";
 	
 	
+	public static final String PATH_RECORD_FILE = Environment.getExternalStorageDirectory() + "/RecordPhoneCall";
 	
 	
-	
-	
+	public static void startAnimComeInBottom(View v, Context c){
+		Animation myAni = AnimationUtils.loadAnimation(c, R.anim.anim_slide_in_bottom);
+		v.clearAnimation();
+		v.startAnimation(myAni);
+	}
 	
 	public static void stopAllService(Context context) {
 		Intent intent = new Intent();
@@ -51,21 +59,6 @@ public class CommonVL {
 		
 		intent.setClass(context, BtnClose.class);
 		context.stopService(intent);
-		
-//		intent.setClass(context, BtnMessage.class);
-//		context.stopService(intent);
-//		
-//		intent.setClass(context, BtnRecall.class);
-//		context.stopService(intent);
-//
-//		intent.setClass(context, BtnNote.class);
-//		context.stopService(intent);
-		
-//		intent.setClass(context, BtnContact.class);
-//		context.stopService(intent);
-		
-//		intent.setClass(context, BtnRecord.class);
-//		context.stopService(intent);
 	}
 	
 	public static int getWidthScreen(Context context){

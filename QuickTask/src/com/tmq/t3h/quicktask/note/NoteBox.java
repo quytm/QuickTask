@@ -12,6 +12,7 @@ import android.view.View.OnTouchListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
@@ -23,7 +24,7 @@ import com.tmq.t3h.quicktask.service.MenuInCall;
 public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTouchListener{
 	private static final String TAG = "NoteBox";
 	private EditText edtNoteContent;
-	private Button btnSaveNote;
+	private ImageButton btnSaveNote;
 	
 	private float 	xDown, yDown,		// Luu vi tri cua ngon tay khi bat dau cham vao man hinh
 					xPre, yPre;			// Luu vi tri cua Layout khi bat dau cham vao man hinh
@@ -45,10 +46,10 @@ public class NoteBox extends LayoutInWindowMgr implements OnClickListener, OnTou
 	@Override
 	protected void initViewsInLayout() {
 		edtNoteContent = (EditText) mView.findViewById(R.id.edtNoteContent);
-		btnSaveNote = (Button) mView.findViewById(R.id.btnSaveNote);
+		btnSaveNote = (ImageButton) mView.findViewById(R.id.btnSaveNote);
 		btnSaveNote.setOnClickListener(this);
 		
-		Button btnCloseNote = (Button) mView.findViewById(R.id.btnCloseNote);
+		ImageButton btnCloseNote = (ImageButton) mView.findViewById(R.id.btnCloseNote);
 		btnCloseNote.setOnClickListener(this);
 		
 		mView.setOnTouchListener(this);

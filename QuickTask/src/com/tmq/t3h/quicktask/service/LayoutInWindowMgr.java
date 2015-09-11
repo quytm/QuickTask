@@ -13,7 +13,7 @@ import com.tmq.t3h.quicktask.MyView;
 
 public abstract class LayoutInWindowMgr extends Service{
 	private LayoutInflater layoutInf;
-	private MyView mViewContainer;
+	protected MyView mViewContainer;
 	private WindowManager mWindow;
 	protected View mView;
 	protected LayoutParams mParams;

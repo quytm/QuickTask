@@ -8,20 +8,22 @@ import java.util.Date;
 import android.content.Context;
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.util.Log;
 
 public class RecordBox {
+	private static final String TAG = "RecordBox";
 	private Context mContext;
 	private static File audioFile;
 	private static MediaRecorder recorder;
 	private static boolean recordstarted  = false; 
 	
 	public static void startRecord(){
-		String out = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss_").format(new Date());
+		String out = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss").format(new Date());
 		File sampleDir = new File(Environment.getExternalStorageDirectory(), "/RecordPhoneCall");
 		if (!sampleDir.exists()) {
 			sampleDir.mkdirs();
 		}
-		String file_name = "RecCall_" + out;
+		String file_name = "Rec_" + out;
 		try {
 			audioFile = File.createTempFile(file_name, ".amr", sampleDir);
 		} catch (IOException e) {

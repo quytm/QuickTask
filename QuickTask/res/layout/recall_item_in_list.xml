@@ -3,7 +3,9 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
     <ImageView
         android:id="@+id/imgIconItemRecall"
@@ -24,24 +26,25 @@
         android:textSize="20sp"/>
     
     <TextView 
-        android:id="@+id/txtRecallPhoneNumber"
+        android:id="@+id/txtRecallTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/txtRecallPhoneName"
         android:layout_alignBaseline="@+id/txtRecallPhoneName"
-        android:layout_marginLeft="10dp"
-        android:text="000 000 000"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:text="Recall time"
         android:textSize="17sp"
+        android:textColor="@android:color/darker_gray"
         />
 
     <TextView
-        android:id="@+id/txtRecallTime"
+        android:id="@+id/txtRecallPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/imgIconItemRecall"
         android:layout_alignBottom="@+id/imgIconItemRecall"
         android:layout_marginLeft="10dp"
-        android:text="Recall time" 
+        android:text="000 000 000" 
         android:textSize="15sp"/>
 
 </RelativeLayout>

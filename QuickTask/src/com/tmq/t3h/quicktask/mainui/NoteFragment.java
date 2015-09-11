@@ -28,10 +28,10 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 	private ListNoteAdapter adapter;
 	private Context mContext;
 	
-	private View currentView = null;
-	private int posViewIsClick = -1;
-	
+	private AdapterView<?> adapterView = null;
 	private Dialog dialog;
+	private EditText edtContact, edtContent;
+	private int posViewIsClick = -1;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		listNote.setAdapter(adapter);
 		listNote.setOnItemClickListener(this);
 	}
-	private AdapterView<?> adapterView = null;
+	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
@@ -58,28 +58,10 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		
 		adapterView = parent;
 		posViewIsClick = position;
-		currentView = view;
-		
-		
-		
-		final AdapterView<?> p = parent;
-		final int pos = position;
-		/*
-		view.postDelayed(new Runnable() {
-			
-			@Override
-			public void run() {
-				p.removeViews(pos, 1);
-				ListNoteAdapter adapter = (ListNoteAdapter) p.getAdapter();
-				adapter.removeItem(pos);
-			}
-		}, 500);
-		*/
 	}
-	EditText edtContact, edtContent;
+	
 	private void showDialogWhenClickItem(View view){
 		dialog.setContentView(R.layout.note_dialog_when_click_item);
-		dialog.setTitle("Edit note:");
 		
 		// InitViews
 		edtContact 	= (EditText)		dialog.findViewById(R.id.edtNoteDialogContact);
@@ -137,7 +119,7 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		dialog.dismiss();
 	}
 	
-	// copy text to clipboard
+	// copy text to clip board
 	private void setClipboard(String text) {
 	    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
 	        android.text.ClipboardManager clipboard = (android.text.ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);

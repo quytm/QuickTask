@@ -79,10 +79,12 @@ public class MyCallReceiver extends BroadcastReceiver {
 	
 	private void onIdle(Context context){
 		currentState = TelephonyManager.EXTRA_STATE_IDLE;
+		confirmContactInAddressBook(context);
+		intentSend.putExtra(CommonVL.PHONE_DISPLAY_NAME, phoneDisplayName);
 		intentSend.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
 		intentSend.putExtra(CommonVL.PHONE_STATE, currentState);
-		CommonVL.stopAllService(context);
-		context.startService(intentSend);
+//		CommonVL.stopAllService(context);
+//		context.startService(intentSend);
 	}
 
 	private void confirmContactInAddressBook(Context context){

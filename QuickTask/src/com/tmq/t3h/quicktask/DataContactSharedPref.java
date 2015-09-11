@@ -82,7 +82,7 @@ public class DataContactSharedPref {
 		}
 		
 		// If data is Note and Recall -> Set note="null"
-		if (getData(position).recallId != -1) {
+		if ( (getData(position).recallId != -1)   &&   (!getData(position).note.equals("null")) ){
 			setNoteDataAt(position, "null");
 //			Log.i(TAG, "data is recall " + position);
 			return;
@@ -145,4 +145,5 @@ public class DataContactSharedPref {
 		
 //		Log.i(TAG, "setNote at " + position + ", newNode = " + newNote);
 	}
+	
 }

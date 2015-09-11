@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="250dp"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:padding="2dp"
-    android:orientation="vertical" 
-    android:background="@android:color/holo_blue_light">
+    android:orientation="vertical"
+    android:padding="10dp" 
+    android:background="@android:color/white">
 
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:gravity="center_horizontal"
-        android:background="@android:color/white">
+        android:gravity="center_horizontal">
         
         <TextView
-	        android:id="@+id/txtRecallAmuontOfHour"
+	        android:id="@+id/txtRecallAmuontOfHourDialog"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="09"
 	        android:textSize="30sp"
-	        android:textColor="@android:color/holo_blue_light" 
-	        android:textStyle="bold"/>
+	        android:textColor="@android:color/holo_orange_dark" />
 
         <TextView
             android:id="@+id/textView1"
@@ -28,19 +25,17 @@
             android:layout_height="wrap_content"
             android:text=" : " 
             android:textSize="30sp"
-	        android:textColor="@android:color/holo_blue_light"
-	        android:textStyle="bold"/>
+	        android:textColor="@android:color/holo_blue_light"/>
         
         <TextView
-	        android:id="@+id/txtRecallAmuontOfMinute"
+	        android:id="@+id/txtRecallAmuontOfMinuteDialog"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="30"
 	        android:textSize="30sp" 
-	        android:textColor="@android:color/holo_blue_light" 
-	        android:textStyle="bold"/>
+	        android:textColor="@android:color/holo_orange_light" />
     </LinearLayout>
-
+    
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
@@ -52,24 +47,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:background="@android:color/white"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content" >
             
             <TextView
-	    	    android:id="@+id/txtRecallHour"
+	    	    android:id="@+id/txtRecallHourDialog"
 	    	    android:layout_width="55dp"
 	    	    android:layout_height="30dp"
 	    	    android:gravity="center_vertical"
 	    	    android:text="Hour" />
 			
             <SeekBar
-	    	    android:id="@+id/sbrRecallHour"
+	    	    android:id="@+id/sbrRecallHourDialog"
 	    	    android:layout_width="match_parent"
 	    	    android:layout_height="wrap_content"
 	    	    android:max="23"
@@ -80,18 +74,17 @@
     	<LinearLayout
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content" 
-    	    android:layout_marginTop="10dp"
-    	    >
+    	    android:layout_marginTop="10dp">
     	
     	    <TextView
-		        android:id="@+id/txtRecallMinute"
+		        android:id="@+id/txtRecallMinuteDialog"
 		        android:layout_width="55dp"
 		        android:layout_height="30dp"
 		        android:gravity="center_vertical"
 		        android:text="Minutes" />
     	    
     	    <SeekBar
-	    	    android:id="@+id/sbrRecallMinute"
+	    	    android:id="@+id/sbrRecallMinuteDialog"
 	    	    android:layout_width="match_parent"
 	    	    android:layout_height="wrap_content"
 	    	    android:max="59"
@@ -101,28 +94,57 @@
     	</LinearLayout>
     
     </LinearLayout>
-
+    
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+         android:background="@android:color/white"
         android:src="@drawable/divider_listview" />
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" 
-	    android:background="@android:color/white"
-	    >
-    	
-	    <ImageButton
-		    android:id="@+id/btnRecallLater"
-		    android:layout_width="match_parent"
-		    android:layout_height="40dp"
-		    android:textStyle="bold" 
-		    android:background="@android:color/white"
-		    android:src="@android:drawable/ic_menu_recent_history"/>
-	    
-	</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10dp">
+
+        <ImageButton
+            android:id="@+id/btnRecallDialogDeleteItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="@android:color/white"
+            />
+
+        <ImageButton
+            android:id="@+id/btnRecallDialogCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="@android:color/white"
+            />
+
+        <ImageButton
+            android:id="@+id/btnRecallDialogRemineRecall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_recent_history"
+            android:background="@android:color/white"
+            />
+
+        <ImageButton
+            android:id="@+id/btnRecallDialogCallNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_call" 
+            android:background="@android:color/white"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>

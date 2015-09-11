@@ -1,6 +1,7 @@
 package com.tmq.t3h.quicktask.service;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,15 +63,6 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 		btnRecord.setOnClickListener(this);
 	}
 	
-	private void startAnimationForAllButton(int IDAnimation){
-		Animation myAni = AnimationUtils.loadAnimation(this, IDAnimation);
-		btnMessage.startAnimation(myAni);
-		btnRecall.startAnimation(myAni);
-		btnNote.startAnimation(myAni);
-		btnContact.startAnimation(myAni);
-		btnRecord.startAnimation(myAni);
-	}
-	
 	//--------------------------- Click Event ------------------------------------------
 	@Override
 	public void onClick(View v) {
@@ -104,6 +96,7 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				break;
 			case R.id.btnRecordNew:
 				RecordBox.startRecord();
+				startAnimationDuringRecording();
 				Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
 				boxIsShow = CommonVL.RECORD_BOX_SHOWED;
 				break;
@@ -136,6 +129,7 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				break;
 			case CommonVL.RECORD_BOX_SHOWED:
 				RecordBox.stopRecord();
+				clearAnimationRecording();//-----------------------------------
 				Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
 				valueReturn = CommonVL.RECORD_BOX_SHOWED;
 				break;
@@ -184,8 +178,29 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
 		phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
 		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		Log.i(TAG, "on start command: " + phoneDisplayName + phoneNumber + phoneState);
 		boxIsShow = intent.getIntExtra(CommonVL.NOTI_STATE_BOX, 0);
 		return super.onStartCommand(intent, flags, startId);
 	}
 
+	// --------------------------------- Process in Button --------------------------------
+	
+	private void startAnimationForAllButton(int IDAnimation){
+		Animation myAni = AnimationUtils.loadAnimation(this, IDAnimation);
+		btnMessage.startAnimation(myAni);
+		btnRecall.startAnimation(myAni);
+		btnNote.startAnimation(myAni);
+		btnContact.startAnimation(myAni);
+		btnRecord.startAnimation(myAni);
+	}
+	
+	private void startAnimationDuringRecording(){
+		btnRecord.setBackgroundResource(R.drawable.ico_recording);
+		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_state_recording);
+		btnRecord.startAnimation(myAni);
+	}
+	private void clearAnimationRecording(){
+		btnRecord.clearAnimation();
+		btnRecord.setBackgroundResource(R.drawable.ico_record);
+	}
 }

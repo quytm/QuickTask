@@ -5,12 +5,12 @@ import java.util.Calendar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -28,11 +28,12 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	private static final String TAG = "RecallLaterBox";
 	private TextView txtAmountOfHour, txtAmountOfMinute;
 	private SeekBar sbrHour, sbrMinute;
-	private Button btnRecallLater;
+	private ImageButton btnRecallLater;
+	private Calendar calendar;
 	
 	@Override
 	protected int setIdLayout() {
-		Log.i(TAG, "setLayout");
+//		Log.i(TAG, "setLayout");
 		return R.layout.recall_later_box;
 	}
 
@@ -51,12 +52,18 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 		txtAmountOfMinute = (TextView) mView.findViewById(R.id.txtRecallAmuontOfMinute);
 		sbrHour = (SeekBar) mView.findViewById(R.id.sbrRecallHour);
 		sbrMinute = (SeekBar) mView.findViewById(R.id.sbrRecallMinute);
-		btnRecallLater = (Button) mView.findViewById(R.id.btnRecallLater);
+		btnRecallLater = (ImageButton) mView.findViewById(R.id.btnRecallLater);
 		
 		sbrHour.setOnSeekBarChangeListener(this);
 		sbrMinute.setOnSeekBarChangeListener(this);
 		
 		btnRecallLater.setOnClickListener(this);
+		
+		calendar = Calendar.getInstance();
+		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		int minutes = calendar.get(Calendar.MINUTE);
+		sbrHour.setProgress(hours);
+		sbrMinute.setProgress(minutes + 20);
 	}
 	
 	@Override
@@ -74,10 +81,10 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 			boolean fromUser) {
 		switch (seekBar.getId()) {
 		case R.id.sbrRecallHour:
-			txtAmountOfHour.setText(""+progress);
+			txtAmountOfHour.setText((progress>9 ? "" : "0") + progress);
 			break;
 		case R.id.sbrRecallMinute:
-			txtAmountOfMinute.setText(""+progress);
+			txtAmountOfMinute.setText((progress>9 ? "" : "0") + progress);
 			break;
 		}
 	}
@@ -99,13 +106,13 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	
 	
 	private void setTimeToRemine(){
-		Calendar calendar = Calendar.getInstance();
-		int minutes = calendar.get(Calendar.MINUTE);
-		int hours = calendar.get(Calendar.HOUR_OF_DAY);
+//		int minutes = calendar.get(Calendar.MINUTE);
+//		int hours = calendar.get(Calendar.HOUR_OF_DAY);
 		
-		int minutesRemine = ( minutes + sbrMinute.getProgress() ) % 60;
-		int hoursRemine = ( hours + (minutes + sbrMinute.getProgress()) / 60 ) % 24;
-		Toast.makeText(this, hoursRemine + "h : " + minutesRemine + "min", Toast.LENGTH_SHORT).show();
+//		int minutesRemine = ( minutes + sbrMinute.getProgress() ) % 60;
+//		int hoursRemine = ( hours + (minutes + sbrMinute.getProgress()) / 60 ) % 24;
+		int minutesRemine = sbrMinute.getProgress();
+		int hoursRemine = sbrHour.getProgress();
 
 		calendar.set(Calendar.HOUR_OF_DAY, hoursRemine);
 		calendar.set(Calendar.MINUTE, minutesRemine);
@@ -121,7 +128,7 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	}
 	
 	private int saveToSharedPref(int h, int min){
-		String time = h + "h : " + min + "min";
+		String time = (h>9?h:"0"+h) + " : " + (min>9?min:"0"+min);
 		int id = (int)System.currentTimeMillis();
 		DataContactSharedPref saveTimeRecall = new DataContactSharedPref(this);
 		Toast.makeText(this, "save: " + time, Toast.LENGTH_SHORT).show();
