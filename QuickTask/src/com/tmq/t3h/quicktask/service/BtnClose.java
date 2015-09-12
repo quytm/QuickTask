@@ -9,13 +9,10 @@ import com.tmq.t3h.quicktask.R;
 public class BtnClose extends BtnComponent{
 
 	@Override
-	protected int setPosition() {
-		return 1200;
-	}
-
-	@Override
 	protected int setBackgroundComponent() {
-		return R.drawable.btn_close;
+		if (CommonVL.getDataSharePreferences(this).getModeHand() == CommonVL.MODE_HAND_LEFT)
+			return R.drawable.btn_close_left;
+		else return R.drawable.btn_close;
 	}
 
 	@Override

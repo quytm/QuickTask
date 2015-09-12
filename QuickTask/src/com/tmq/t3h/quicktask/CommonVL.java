@@ -13,6 +13,10 @@ import com.tmq.t3h.quicktask.service.BtnClose;
 import com.tmq.t3h.quicktask.service.BtnOpen;
 
 public class CommonVL {
+	
+	// --------------------------------------------------------------------------
+	// 						Save Data
+	//----------------------------------------------------------------------------
 
 	// Phone Call
 	public static final String PHONE_NUMBER = "quicktask.phone_number";
@@ -44,7 +48,24 @@ public class CommonVL {
 	
 	
 	public static final String PATH_RECORD_FILE = Environment.getExternalStorageDirectory() + "/RecordPhoneCall";
+	public static final String TAB_ID = "tab_id";
 	
+	
+	//-----------------------------------------------------------------------
+	//								 Setting
+	//-----------------------------------------------------------------------
+	public static final String MODE_HAND = "mode_use_hand";
+	public static final int MODE_HAND_RIGHT = 1111;
+	public static final int MODE_HAND_LEFT = 2222;
+	
+	
+	// -------------------------- Function --------------------------------------------
+	private static DataContactSharedPref data = null;
+	
+	public static DataContactSharedPref getDataSharePreferences(Context context){
+		if (data == null) data = new DataContactSharedPref(context);
+		return data;
+	}
 	
 	public static void startAnimComeInBottom(View v, Context c){
 		Animation myAni = AnimationUtils.loadAnimation(c, R.anim.anim_slide_in_bottom);
@@ -74,3 +95,4 @@ public class CommonVL {
 	}
 
 }
+

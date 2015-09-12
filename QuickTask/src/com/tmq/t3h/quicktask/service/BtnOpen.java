@@ -21,13 +21,10 @@ public class BtnOpen extends BtnComponent implements OnLongClickListener{
 
 
 	@Override
-	protected int setPosition() {
-		return 1200;
-	}
-
-	@Override
 	protected int setBackgroundComponent() {
-		return R.drawable.btn_open;
+		if (CommonVL.getDataSharePreferences(this).getModeHand() == CommonVL.MODE_HAND_LEFT)
+			return R.drawable.btn_open_left;
+		else return R.drawable.btn_open;
 	}
 
 	@Override

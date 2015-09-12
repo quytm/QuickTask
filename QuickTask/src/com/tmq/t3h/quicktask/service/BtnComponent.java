@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.MyView;
 import com.tmq.t3h.quicktask.R;
 
@@ -40,14 +41,17 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 		
 		// Get Params
 		mParams = new LayoutParams();
-		mParams.gravity = Gravity.END | Gravity.TOP;
+		// Set gravity
+		if (CommonVL.getDataSharePreferences(this).getModeHand() == CommonVL.MODE_HAND_LEFT)
+			 mParams.gravity = Gravity.START | Gravity.BOTTOM;
+		else mParams.gravity = Gravity.END | Gravity.BOTTOM;
+		// Set other
 		mParams.width = LayoutParams.WRAP_CONTENT;
 		mParams.height = LayoutParams.WRAP_CONTENT;
 		mParams.flags = LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
 						LayoutParams.FLAG_NOT_FOCUSABLE |
 						LayoutParams.FLAG_HARDWARE_ACCELERATED;
 		mParams.type = LayoutParams.TYPE_PHONE;
-		mParams.y = setPosition();
 		mParams.format = PixelFormat.TRANSPARENT;
 		
 		// Get View
@@ -67,7 +71,10 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 	public void onDestroy() {
 		super.onDestroy();
 		if (mViewContainer!=null){
-			Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_bottom);
+			Animation myAni;
+			if (CommonVL.getDataSharePreferences(this).getModeHand() == CommonVL.MODE_HAND_LEFT)
+				myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_left);
+			else myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_right);
 			btnComponent.clearAnimation();
 			btnComponent.startAnimation(myAni);
 			
@@ -98,6 +105,5 @@ public abstract class BtnComponent extends Service implements OnClickListener{
 	}
 
 	//-------------------------------------------------
-	protected abstract int setPosition();	// Set position for LayoutParams
 	protected abstract int setBackgroundComponent();	// Set Background for Button in Component
 }

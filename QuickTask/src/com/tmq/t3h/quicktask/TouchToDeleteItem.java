@@ -20,7 +20,7 @@ public class TouchToDeleteItem implements OnTouchListener{
 	
 	public TouchToDeleteItem(Context c) {
 		mContext = c;
-		myAni = AnimationUtils.loadAnimation(mContext, R.anim.anim_slide_out_bottom);
+		myAni = AnimationUtils.loadAnimation(mContext, R.anim.anim_slide_out_right);
 	}
 
 	@Override

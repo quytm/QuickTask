@@ -61,9 +61,12 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 		
 		calendar = Calendar.getInstance();
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		int minutes = calendar.get(Calendar.MINUTE);
+		int minutes = calendar.get(Calendar.MINUTE) + 20;
+		if (minutes>59){
+			minutes %= 60;		hours ++;
+		}
 		sbrHour.setProgress(hours);
-		sbrMinute.setProgress(minutes + 20);
+		sbrMinute.setProgress(minutes);
 	}
 	
 	@Override

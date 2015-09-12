@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
+import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.MyView;
 
 public abstract class LayoutInWindowMgr extends Service{
@@ -21,9 +22,13 @@ public abstract class LayoutInWindowMgr extends Service{
 	protected String phoneNumber = "000 000 000";
 	protected String phoneState = "Idle Idle Idle";
 	protected String phoneDisplayName = "No name";
+	
+	protected int modeHand = 0;
 
 	@Override
 	public void onCreate() {
+		modeHand = CommonVL.getDataSharePreferences(this).getModeHand();
+		
 		layoutInf = LayoutInflater.from(this);
 		mViewContainer = new MyView(this);
 		mView = layoutInf.inflate(setIdLayout(), mViewContainer);

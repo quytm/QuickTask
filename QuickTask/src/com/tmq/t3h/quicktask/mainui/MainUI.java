@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.tmq.t3h.quicktask.CommonVL;
+import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.service.BtnOpen;
 
@@ -18,38 +20,65 @@ public class MainUI extends Activity {
 	private static final String TAG_NOTE = "tag_note";
 	private static final String TAG_RECALL = "tag_recall";
 	private static final String TAG_RECORD = "tag_record";
-	
 	private static final String TAG = "MainUI";
+	
+	private ActionBar actionBar;
+	private int tabID;
+	private Tab tab1, tab2, tab3;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quick_task_activity_main);
+
+		DataContactSharedPref data = new DataContactSharedPref(this);
+		data.settingDefault();
+		data.setModUseHand(CommonVL.MODE_HAND_LEFT);
 		
-		ActionBar actionBar = getActionBar();
-		
+		setTab();
+	}
+	
+	private void setTab(){
+		actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		
-		Tab tab = actionBar.newTab();
-		tab.setIcon(getResources().getDrawable(R.drawable.ico_note_blue));
+		tab1 = actionBar.newTab();
+		tab1.setIcon(getResources().getDrawable(R.drawable.ico_note_blue));
 		TabListener<NoteFragment> t1 = new TabListener<NoteFragment>(this, TAG_NOTE, NoteFragment.class);
-		tab.setTabListener(t1);
-		actionBar.addTab(tab);
+		tab1.setTabListener(t1);
+		actionBar.addTab(tab1);
 		
-		tab = actionBar.newTab();
-		tab.setIcon(getResources().getDrawable(R.drawable.ico_recall_gray));
+		tab2 = actionBar.newTab();
+		tab2.setIcon(getResources().getDrawable(R.drawable.ico_recall_gray));
 		TabListener<RecallFragment> t2 = new TabListener<RecallFragment>(this, TAG_RECALL, RecallFragment.class);
-		tab.setTabListener(t2);
-		actionBar.addTab(tab);
+		tab2.setTabListener(t2);
+		actionBar.addTab(tab2);
 		
-		tab = actionBar.newTab();
-		tab.setIcon(getResources().getDrawable(R.drawable.ico_record_gray));
+		tab3 = actionBar.newTab();
+		tab3.setIcon(getResources().getDrawable(R.drawable.ico_record_gray));
 		TabListener<RecordFragment> t3 = new TabListener<RecordFragment>(this, TAG_RECORD, RecordFragment.class);
-		tab.setTabListener(t3);
-		actionBar.addTab(tab);
-		
+		tab3.setTabListener(t3);
+		actionBar.addTab(tab3);
 	}
+	
+	@Override
+	protected void onStart() {
+		Intent intent = new Intent();
+		tabID = intent.getIntExtra(CommonVL.TAB_ID, -1);
+		Toast.makeText(this, "tab_id = " + tabID, Toast.LENGTH_SHORT).show();
+		switch (tabID) {
+		case 2:
+			actionBar.selectTab(tab2);
+			break;
 
+		default:
+			break;
+		}
+		super.onStart();
+	}
+	
+	
+	//--------------------------- Class: TabListener -----------------------------------
 	private class TabListener<T extends Fragment> implements ActionBar.TabListener {
 
 		private android.app.Fragment mFragment;
@@ -97,6 +126,8 @@ public class MainUI extends Activity {
 	}
 	
 
+	
+	//------------------ Menu ----------------------------------------------------
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -118,9 +149,5 @@ public class MainUI extends Activity {
 		
 	}
 	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-	}
 
 }

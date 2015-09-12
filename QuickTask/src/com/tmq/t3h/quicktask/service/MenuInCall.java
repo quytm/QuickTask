@@ -32,12 +32,17 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	
 	@Override
 	protected int setIdLayout() {
-		return R.layout.menu_in_call;
+		if (modeHand == CommonVL.MODE_HAND_LEFT)	return R.layout.menu_in_call_left;
+		else return R.layout.menu_in_call;
 	}
 
 	@Override
 	protected void setForLayoutParams() {
-		mParams.gravity = Gravity.END | Gravity.TOP;
+		if (modeHand == CommonVL.MODE_HAND_LEFT)	
+			mParams.gravity = Gravity.START | Gravity.TOP;
+		else 
+			mParams.gravity = Gravity.END | Gravity.TOP;
+		
 		mParams.flags = LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
 						LayoutParams.FLAG_NOT_FOCUSABLE |
 						LayoutParams.FLAG_HARDWARE_ACCELERATED;
@@ -161,8 +166,12 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	@Override
 	public void onDestroy() {
 		hideCurrentBox();
-		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_bottom);
-		startAnimationForAllButton(R.anim.anim_slide_out_bottom);
+		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_slide_out_right);
+		if (modeHand == CommonVL.MODE_HAND_LEFT)
+			startAnimationForAllButton(R.anim.anim_slide_out_left);
+		else 
+			startAnimationForAllButton(R.anim.anim_slide_out_right);
+		
 		btnRecord.postDelayed(new Runnable() {
 			
 			@Override
@@ -195,12 +204,14 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	}
 	
 	private void startAnimationDuringRecording(){
-		btnRecord.setBackgroundResource(R.drawable.ico_recording);
+		if (modeHand == CommonVL.MODE_HAND_LEFT) btnRecord.setBackgroundResource(R.drawable.ico_recording_left);
+		else btnRecord.setBackgroundResource(R.drawable.ico_recording);
 		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_state_recording);
 		btnRecord.startAnimation(myAni);
 	}
 	private void clearAnimationRecording(){
 		btnRecord.clearAnimation();
-		btnRecord.setBackgroundResource(R.drawable.ico_record);
+		if (modeHand == CommonVL.MODE_HAND_LEFT) btnRecord.setBackgroundResource(R.drawable.ico_record_left);
+		else btnRecord.setBackgroundResource(R.drawable.ico_record);
 	}
 }

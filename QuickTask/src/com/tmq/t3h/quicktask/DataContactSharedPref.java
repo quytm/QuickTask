@@ -6,8 +6,12 @@ import android.util.Log;
 
 public class DataContactSharedPref {
 	private static final String TAG = "DataContactSharedPref";
-	private SharedPreferences dataContact;
+	private SharedPreferences data;
 	
+	
+	//-----------------------------------------------------------------------------------
+	// Use for Data Contact
+	//-----------------------------------------------------------------------------------
 	public class DataItem{
 		public String 	name,			// Name Contact
 						number,			// PhoneNumber of Contact
@@ -27,16 +31,16 @@ public class DataContactSharedPref {
 	}
 	
 	public DataContactSharedPref(Context context) {
-		dataContact = context.getSharedPreferences(CommonVL.DATA_CONTACT_SHAREPREFERENCES, Context.MODE_PRIVATE);
+		data = context.getSharedPreferences(CommonVL.DATA_CONTACT_SHAREPREFERENCES, Context.MODE_PRIVATE);
 	}
 	
 	public void putData(String name, String number, String note, 
 						String recallTime, int recallId){
 		// Number of Contact is saved in SharedPreferences
-		int indexOfContact = dataContact.getInt(CommonVL.NUMBER_DATA_CONTACT, 0) + 1;
+		int indexOfContact = data.getInt(CommonVL.NUMBER_DATA_CONTACT, 0) + 1;
 		if (indexOfContact>CommonVL.NUMBER_DATA_CONTACT_MAX) indexOfContact = 1;
 		// Create Editor to put Data
-		SharedPreferences.Editor editor = dataContact.edit();
+		SharedPreferences.Editor editor = data.edit();
 		
 		editor.putString(CommonVL.CONTACT_NAME_			+ indexOfContact, name);
 		editor.putString(CommonVL.CONTACT_PHONE_NUMBER_ + indexOfContact, number);
@@ -60,16 +64,16 @@ public class DataContactSharedPref {
 	}
 	
 	public DataItem getData(int position){
-		int id			= dataContact.getInt(CommonVL.CONTACT_RECALL_ID_		+ position, -1);
-		String name 	= dataContact.getString(CommonVL.CONTACT_NAME_			+ position, "null");
-		String number 	= dataContact.getString(CommonVL.CONTACT_PHONE_NUMBER_	+ position, "null");
-		String note 	= dataContact.getString(CommonVL.CONTACT_NOTE_			+ position, "null");
-		String timeStart= dataContact.getString(CommonVL.CONTACT_TIME_START_	+ position, "null");
+		int id			= data.getInt(CommonVL.CONTACT_RECALL_ID_		+ position, -1);
+		String name 	= data.getString(CommonVL.CONTACT_NAME_			+ position, "null");
+		String number 	= data.getString(CommonVL.CONTACT_PHONE_NUMBER_	+ position, "null");
+		String note 	= data.getString(CommonVL.CONTACT_NOTE_			+ position, "null");
+		String timeStart= data.getString(CommonVL.CONTACT_TIME_START_	+ position, "null");
 		return new DataItem(name, number, note, timeStart, id, position);
 	}
 	
 	public int sizeOfDataContact(){
-		return dataContact.getInt(CommonVL.NUMBER_DATA_CONTACT, 0);
+		return data.getInt(CommonVL.NUMBER_DATA_CONTACT, 0);
 	}
 	
 	public void removeData(int position){
@@ -95,14 +99,14 @@ public class DataContactSharedPref {
 		}
 		deleteDataAt(size);
 		// Size = Size-1
-		SharedPreferences.Editor editor = dataContact.edit();
+		SharedPreferences.Editor editor = data.edit();
 		editor.remove(CommonVL.NUMBER_DATA_CONTACT);
 		editor.putInt(CommonVL.NUMBER_DATA_CONTACT, size-1);
 		editor.commit();
 	}
 	
 	private void deleteDataAt(int position){
-		SharedPreferences.Editor editor = dataContact.edit();
+		SharedPreferences.Editor editor = data.edit();
 		
 		// remove
 		editor.remove(CommonVL.CONTACT_NAME_		+ position);
@@ -118,7 +122,7 @@ public class DataContactSharedPref {
 	
 	private void setDataAt(int position, DataItem item){
 		deleteDataAt(position);
-		SharedPreferences.Editor editor = dataContact.edit();
+		SharedPreferences.Editor editor = data.edit();
 		
 		editor.putString(CommonVL.CONTACT_NAME_			+ position, item.name);
 		editor.putString(CommonVL.CONTACT_PHONE_NUMBER_ + position, item.number);
@@ -135,7 +139,7 @@ public class DataContactSharedPref {
 		DataItem item = getData(position);
 		if (item.note.equals("null")) return;
 		else{
-			SharedPreferences.Editor editor = dataContact.edit();
+			SharedPreferences.Editor editor = data.edit();
 			
 			editor.remove(CommonVL.CONTACT_NOTE_ 	+ position);
 			editor.putString(CommonVL.CONTACT_NOTE_ + position, newNote);
@@ -144,6 +148,36 @@ public class DataContactSharedPref {
 		}
 		
 //		Log.i(TAG, "setNote at " + position + ", newNode = " + newNote);
+	}
+	
+	//-------------------------------------------------------------------------------
+	// Use for setting
+	//-------------------------------------------------------------------------------
+
+	public void settingDefault(){
+		SharedPreferences.Editor editor = data.edit();
+		// Mode use hand
+		int mode = data.getInt(CommonVL.MODE_HAND, 0);
+		if (mode == 0){
+			editor.putInt(CommonVL.MODE_HAND, CommonVL.MODE_HAND_RIGHT);
+		}
+		
+		
+		editor.commit();
+	}
+	
+	
+	public void setModUseHand(int type){
+		SharedPreferences.Editor editor = data.edit();
+		editor.remove(CommonVL.MODE_HAND);
+		editor.putInt(CommonVL.MODE_HAND, type);
+		editor.commit();
+	}
+	
+	//---------------------- Get Setting ------------------------------------------------
+	
+	public int getModeHand(){
+		return data.getInt(CommonVL.MODE_HAND, 0);
 	}
 	
 }
