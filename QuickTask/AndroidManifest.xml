@@ -37,6 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity 
+            android:name="com.tmq.t3h.quicktask.SettingActivity"
+            android:label="@string/action_settings">
+            
+        </activity>
         
         <service android:name="com.tmq.t3h.quicktask.service.MyService"></service>
         <service android:name="com.tmq.t3h.quicktask.service.BtnOpen"></service>

@@ -24,7 +24,7 @@
 	</style>
 
 	<style name="PauseDialogAnimation">
-    	<item name="android:windowEnterAnimation">@anim/anim_slide_in_bottom</item>
+    	<item name="android:windowEnterAnimation">@anim/show_dialog</item>
     	<item name="android:windowExitAnimation">@anim/anim_slide_out_right</item>
 	</style>
     

@@ -39,14 +39,14 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 	@Override
 	protected void setForLayoutParams() {
 		if (modeHand == CommonVL.MODE_HAND_LEFT)	
-			mParams.gravity = Gravity.START | Gravity.TOP;
+			mParams.gravity = Gravity.START | Gravity.BOTTOM;
 		else 
-			mParams.gravity = Gravity.END | Gravity.TOP;
+			mParams.gravity = Gravity.END | Gravity.BOTTOM;
 		
 		mParams.flags = LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
 						LayoutParams.FLAG_NOT_FOCUSABLE |
 						LayoutParams.FLAG_HARDWARE_ACCELERATED;
-		mParams.y = CommonVL.getHeightScreen(this) - 800;
+		mParams.y = 120;
 	}
 
 	//--------------------------- Get View --------------------------------------------

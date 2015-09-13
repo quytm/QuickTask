@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
+import com.tmq.t3h.quicktask.SettingActivity;
 import com.tmq.t3h.quicktask.service.BtnOpen;
 
 public class MainUI extends Activity {
@@ -33,7 +34,6 @@ public class MainUI extends Activity {
 
 		DataContactSharedPref data = new DataContactSharedPref(this);
 		data.settingDefault();
-		data.setModUseHand(CommonVL.MODE_HAND_LEFT);
 		
 		setTab();
 	}
@@ -139,15 +139,16 @@ public class MainUI extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_demo:
-			Toast.makeText(this, "Demo", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(this, BtnOpen.class);
 			startService(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			break;
+		case R.id.action_settings:
+			Intent intentSetting = new Intent(this, SettingActivity.class);
+			startActivity(intentSetting);
+			break;
 		}
 		
+		return super.onOptionsItemSelected(item);
 	}
 	
-
 }
