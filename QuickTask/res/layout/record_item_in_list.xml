@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:gravity="center_vertical">
 
@@ -12,15 +12,49 @@
         android:layout_height="50dp"
         android:src="@drawable/ico_record" />
 
-    <TextView
-        android:id="@+id/txtRecordNameFile"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Name" 
-        android:textSize="20sp"
-        android:textColor="@android:color/black"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical" 
+        >
+
+        <TextView
+            android:id="@+id/txtRecordNameFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:orientation="horizontal">
+            
+            <TextView
+	            android:id="@+id/txtRecordTime"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="12/09/2015 07:35"
+	            />
+            
+            <TextView
+	            android:id="@+id/textView1"
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            />
+            
+            <TextView
+	            android:id="@+id/txtRecordSizeFile"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:hint="156kb"
+	            />
+        </LinearLayout>
+        
+    </LinearLayout>
 
 </LinearLayout>

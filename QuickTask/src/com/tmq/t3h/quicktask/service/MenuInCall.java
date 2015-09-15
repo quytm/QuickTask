@@ -29,6 +29,7 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 					btnRecord;
 	
 	private int boxIsShow = CommonVL.BOX_NOT_SHOWED;
+	private boolean isRecording = false;
 	
 	@Override
 	protected int setIdLayout() {
@@ -65,7 +66,21 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 		btnRecall.setOnClickListener(this);
 		btnNote.setOnClickListener(this);
 		btnContact.setOnClickListener(this);
-		btnRecord.setOnClickListener(this);
+		btnRecord.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (isRecording){
+					stopRecording();
+					Toast.makeText(v.getContext(), "Stop Record", Toast.LENGTH_SHORT).show();
+					isRecording = false;
+				}else{
+					startRecording();
+					Toast.makeText(v.getContext(), "Start Record", Toast.LENGTH_SHORT).show();
+					isRecording = true;
+				}
+			}
+		});
 	}
 	
 	//--------------------------- Click Event ------------------------------------------
@@ -99,12 +114,6 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				intent.setClass(this, ContactBox.class);
 				boxIsShow = CommonVL.CONTACT_BOX_SHOWED;
 				break;
-			case R.id.btnRecordNew:
-				RecordBox.startRecord();
-				startAnimationDuringRecording();
-				Toast.makeText(this, "Start Record", Toast.LENGTH_SHORT).show();
-				boxIsShow = CommonVL.RECORD_BOX_SHOWED;
-				break;
 		}
 		startService(intent);
 	}
@@ -132,12 +141,6 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				valueReturn = CommonVL.CONTACT_BOX_SHOWED;
 				intent.setClass(this, ContactBox.class);
 				break;
-			case CommonVL.RECORD_BOX_SHOWED:
-				RecordBox.stopRecord();
-				clearAnimationRecording();//-----------------------------------
-				Toast.makeText(this, "Stop Record", Toast.LENGTH_SHORT).show();
-				valueReturn = CommonVL.RECORD_BOX_SHOWED;
-				break;
 		}
 		stopService(intent);
 		return valueReturn;
@@ -154,8 +157,6 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				return CommonVL.NOTE_BOX_SHOWED;
 			case R.id.btnContactNew:
 				return CommonVL.CONTACT_BOX_SHOWED;
-			case R.id.btnRecordNew:
-				return CommonVL.RECORD_BOX_SHOWED;
 			default:
 				return CommonVL.BOX_NOT_SHOWED;
 		}
@@ -203,13 +204,17 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 		btnRecord.startAnimation(myAni);
 	}
 	
-	private void startAnimationDuringRecording(){
+	private void startRecording(){
+		RecordBox.startRecord(this);
+		
 		if (modeHand == CommonVL.MODE_HAND_LEFT) btnRecord.setBackgroundResource(R.drawable.ico_recording_left);
 		else btnRecord.setBackgroundResource(R.drawable.ico_recording);
 		Animation myAni = AnimationUtils.loadAnimation(this, R.anim.anim_state_recording);
 		btnRecord.startAnimation(myAni);
 	}
-	private void clearAnimationRecording(){
+	private void stopRecording(){
+		RecordBox.stopRecord();
+		
 		btnRecord.clearAnimation();
 		if (modeHand == CommonVL.MODE_HAND_LEFT) btnRecord.setBackgroundResource(R.drawable.ico_record_left);
 		else btnRecord.setBackgroundResource(R.drawable.ico_record);

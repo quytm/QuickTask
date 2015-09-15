@@ -6,19 +6,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 
 public class RecordBox {
 	private static final String TAG = "RecordBox";
-	private Context mContext;
+	private static Context mContext;
 	private static File audioFile;
 	private static MediaRecorder recorder;
 	private static boolean recordstarted  = false; 
 	
-	public static void startRecord(){
-		String out = new SimpleDateFormat("dd-MM-yyyy_hh-mm-ss").format(new Date());
+	public static void startRecord(Context context){
+		mContext = context;
+		String out = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		File sampleDir = new File(Environment.getExternalStorageDirectory(), "/RecordPhoneCall");
 		if (!sampleDir.exists()) {
 			sampleDir.mkdirs();
@@ -50,6 +52,7 @@ public class RecordBox {
 		if (recordstarted) {
 			recorder.stop();
 			recordstarted = false;
+			mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(audioFile)));
 		}
 	}
 }

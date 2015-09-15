@@ -43,7 +43,6 @@ public class CommonVL {
 	public static final int RECALL_BOX_SHOWED 	= 2;
 	public static final int NOTE_BOX_SHOWED 	= 3;
 	public static final int CONTACT_BOX_SHOWED 	= 4;
-	public static final int RECORD_BOX_SHOWED 	= 5;
 	public static final String NOTI_STATE_BOX	= "notification_state_of_box";
 	
 	

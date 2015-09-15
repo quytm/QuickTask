@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@android:drawable/ic_menu_delete"
-            android:background="@android:color/white"/>
+            android:background="@drawable/bg_btn_pressed"/>
 
         <ImageButton
             android:id="@+id/btnNoteDialogCancel"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
            	android:src="@android:drawable/ic_menu_close_clear_cancel"
-           	android:background="@android:color/white"/>
+           	android:background="@drawable/bg_btn_pressed"/>
 
         <ImageButton
             android:id="@+id/btnNoteDialogCopy"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@android:drawable/ic_menu_set_as"
-            android:background="@android:color/white"/>
+            android:background="@drawable/bg_btn_pressed"/>
 
         <ImageButton
             android:id="@+id/btnNoteDialogSave"
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@android:drawable/ic_menu_save"
-            android:background="@android:color/white"/>
+            android:background="@drawable/bg_btn_pressed"/>
 
     </LinearLayout>
 

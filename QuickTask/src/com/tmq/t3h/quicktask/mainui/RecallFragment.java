@@ -38,6 +38,7 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 	private SeekBar sbrHour, sbrMinutes;
 	private TextView txtHour, txtMinutes;
 	private int posViewIsClick = -1;
+	private View currentView = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +65,7 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 		
 		adapterView = parent;
 		posViewIsClick = position;
+		currentView = view;
 	}
 
 	
@@ -78,6 +80,8 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 		
 		txtHour			= (TextView)	dialog.findViewById(R.id.txtRecallAmuontOfHourDialog);
 		txtMinutes		= (TextView)	dialog.findViewById(R.id.txtRecallAmuontOfMinuteDialog);
+		txtHour.setBackgroundResource(android.R.color.white);
+		txtMinutes.setBackgroundResource(android.R.color.white);
 		
 		ImageButton btnDelete	= (ImageButton)		dialog.findViewById(R.id.btnRecallDialogDeleteItem);
 		ImageButton btnCancel	= (ImageButton)		dialog.findViewById(R.id.btnRecallDialogCancel);
@@ -108,8 +112,9 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 	public void onClick(View v) {
 		DataContactSharedPref sharedPref = new DataContactSharedPref(mContext);
 		
-//		View view = adapterView.getChildAt(posViewIsClick);
-//		TextView txtContent = (TextView) view.findViewById(R.id.);
+//		if (currentView == null) return;
+//		TextView txtContent = (TextView) currentView.findViewById(R.id);
+		
 		switch (v.getId()) {
 		case R.id.btnRecallDialogDeleteItem:
 			Toast.makeText(mContext, "Recall is deleted", Toast.LENGTH_SHORT).show();
@@ -163,13 +168,25 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 	
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
+		switch (seekBar.getId()) {
+			case R.id.sbrRecallHourDialog:	
+				txtHour.setBackgroundResource(android.R.drawable.editbox_background);
+				break;
+			case R.id.sbrRecallMinuteDialog:
+				txtMinutes.setBackgroundResource(android.R.drawable.editbox_background);
+				break;
+		}
 	}
 	
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
-		
+		switch (seekBar.getId()) {
+			case R.id.sbrRecallHourDialog:	
+				txtHour.setBackgroundResource(android.R.color.white);
+				break;
+			case R.id.sbrRecallMinuteDialog:
+				txtMinutes.setBackgroundResource(android.R.color.white);
+				break;
+		}
 	}
 }

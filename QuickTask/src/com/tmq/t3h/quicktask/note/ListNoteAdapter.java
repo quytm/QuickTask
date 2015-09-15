@@ -38,7 +38,7 @@ public class ListNoteAdapter extends BaseAdapter{
 		DataContactSharedPref dataContact = new DataContactSharedPref(context);
 		int size = dataContact.sizeOfDataContact();
 		DataContactSharedPref.DataItem item;
-		for (int i=1; i<=size; i++){
+		for (int i=size; i>=0; i--){
 			item = dataContact.getData(i);
 			if (!item.note.equals("null")){
 				Log.i(TAG, "note " + i + " = " + item.note + ", id = " + item.recallId);

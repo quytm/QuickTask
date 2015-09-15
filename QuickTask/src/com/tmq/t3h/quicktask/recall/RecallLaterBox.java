@@ -50,6 +50,8 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	protected void initViewsInLayout() {
 		txtAmountOfHour = (TextView) mView.findViewById(R.id.txtRecallAmuontOfHour);
 		txtAmountOfMinute = (TextView) mView.findViewById(R.id.txtRecallAmuontOfMinute);
+		txtAmountOfHour.setBackgroundResource(android.R.color.white);
+		txtAmountOfMinute.setBackgroundResource(android.R.color.white);
 		sbrHour = (SeekBar) mView.findViewById(R.id.sbrRecallHour);
 		sbrMinute = (SeekBar) mView.findViewById(R.id.sbrRecallMinute);
 		btnRecallLater = (ImageButton) mView.findViewById(R.id.btnRecallLater);
@@ -94,10 +96,26 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
+		switch (seekBar.getId()) {
+		case R.id.sbrRecallHour:	
+			txtAmountOfHour.setBackgroundResource(android.R.drawable.editbox_background);
+			break;
+		case R.id.sbrRecallMinute:
+			txtAmountOfMinute.setBackgroundResource(android.R.drawable.editbox_background);
+			break;
+	}
 	}
 
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
+		switch (seekBar.getId()) {
+		case R.id.sbrRecallHour:	
+			txtAmountOfHour.setBackgroundResource(android.R.color.white);
+			break;
+		case R.id.sbrRecallMinute:
+			txtAmountOfMinute.setBackgroundResource(android.R.color.white);
+			break;
+	}
 	}
 
 	

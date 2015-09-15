@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:gravity="center_horizontal"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        >
         
         <TextView
 	        android:id="@+id/txtRecallAmuontOfHour"
@@ -20,7 +21,8 @@
 	        android:text="09"
 	        android:textSize="30sp"
 	        android:textColor="@android:color/holo_blue_light" 
-	        android:textStyle="bold"/>
+	        android:textStyle="bold"
+	        android:background="@android:drawable/editbox_background"/>
 
         <TextView
             android:id="@+id/textView1"
@@ -38,7 +40,8 @@
 	        android:text="30"
 	        android:textSize="30sp" 
 	        android:textColor="@android:color/holo_blue_light" 
-	        android:textStyle="bold"/>
+	        android:textStyle="bold"
+	        android:background="@android:drawable/editbox_background"/>
     </LinearLayout>
 
     <ImageView

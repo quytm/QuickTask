@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 	private Dialog dialog;
 	private EditText edtContact, edtContent;
 	private int posViewIsClick = -1;
+	private View currentView = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +61,7 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		
 		adapterView = parent;
 		posViewIsClick = position;
+		currentView = view;
 	}
 	
 	private void showDialogWhenClickItem(View view){
@@ -89,33 +93,40 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 	
 	@Override
 	public void onClick(View v) {
+		// Hide Virtual keyboard
+		InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+	    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+	    
 		DataContactSharedPref sharedPref = new DataContactSharedPref(mContext);
 		
-		View view = adapterView.getChildAt(posViewIsClick);
-		TextView txtContent = (TextView) view.findViewById(R.id.txtNoteContent);
+		// Get Text content -> set data
+		if (currentView==null)	return;
+		TextView txtContent = (TextView) currentView.findViewById(R.id.txtNoteContent);
+		
 		switch (v.getId()) {
-		case R.id.btnNoteDialogDelete:
-			Toast.makeText(mContext, "Note is deleted", Toast.LENGTH_SHORT).show();
-			adapterView.removeViews(posViewIsClick, 1);
-			sharedPref.removeData(adapter.getItem(posViewIsClick).position);
-			Log.i(TAG, "pos = " + adapter.getItem(posViewIsClick).position);
-			adapter.removeItem(posViewIsClick);
-			break;
-		case R.id.btnNoteDialogCancel:
-			Toast.makeText(mContext, "Close", Toast.LENGTH_SHORT).show();
-			break;
-		case R.id.btnNoteDialogCopy:
-			Toast.makeText(mContext, "Note is copied to clipboard!", Toast.LENGTH_SHORT).show();
-			setClipboard(txtContent.getText().toString());
-			break;
-		case R.id.btnNoteDialogSave:
-			Toast.makeText(mContext, "Note is changed", Toast.LENGTH_SHORT).show();
-			txtContent.setText(edtContent.getText().toString());
-			adapter.setItem(edtContact.getText().toString(), edtContent.getText().toString(), posViewIsClick);
-			sharedPref.setNoteDataAt(adapter.getItem(posViewIsClick).position, edtContent.getText().toString());
-			break;
+			case R.id.btnNoteDialogDelete:
+				Toast.makeText(mContext, "Note is deleted", Toast.LENGTH_SHORT).show();
+				adapterView.removeViews(posViewIsClick, 1);
+				sharedPref.removeData(adapter.getItem(posViewIsClick).position);
+				Log.i(TAG, "pos = " + adapter.getItem(posViewIsClick).position);
+				adapter.removeItem(posViewIsClick);
+				break;
+			case R.id.btnNoteDialogCancel:
+				Toast.makeText(mContext, "Close", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.btnNoteDialogCopy:
+				Toast.makeText(mContext, "Note is copied to clipboard!", Toast.LENGTH_SHORT).show();
+				setClipboard(txtContent.getText().toString());
+				break;
+			case R.id.btnNoteDialogSave:
+				Toast.makeText(mContext, "Note is changed", Toast.LENGTH_SHORT).show();
+				txtContent.setText(edtContent.getText().toString());
+				adapter.setItem(edtContact.getText().toString(), edtContent.getText().toString(), posViewIsClick);
+				sharedPref.setNoteDataAt(adapter.getItem(posViewIsClick).position, edtContent.getText().toString());
+				break;
 		}
 		
+		// Hide Dialog
 		dialog.dismiss();
 	}
 	
