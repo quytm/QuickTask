@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
 public class RecordBox {
 	private static final String TAG = "RecordBox";
@@ -20,18 +21,21 @@ public class RecordBox {
 	
 	public static void startRecord(Context context){
 		mContext = context;
-		String out = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+//		Date date = Calendar.getInstance().getTime();
+		String out = new SimpleDateFormat("ddMM_HHmm").format(new Date());
+//		String out = new SimpleDateFormat("ddMM_HHmm").format(date);
 		File sampleDir = new File(Environment.getExternalStorageDirectory(), "/RecordPhoneCall");
 		if (!sampleDir.exists()) {
 			sampleDir.mkdirs();
 		}
-		String file_name = "Rec_" + out;
+		Log.i(TAG, "sample dir = " + sampleDir.getPath());
+		String fileName = "Rec_" + out;
 		try {
-			audioFile = File.createTempFile(file_name, ".amr", sampleDir);
+			audioFile = File.createTempFile(fileName, ".amr", sampleDir);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		recorder = new MediaRecorder();
 		recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
 		recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);

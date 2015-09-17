@@ -37,6 +37,10 @@ public class ListRecordAdapter extends BaseAdapter{
 	public long getItemId(int position) {
 		return position;
 	}
+	
+	public void removeItem(int position){
+		if (position<listAudio.size()) listAudio.remove(position);
+	}
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
@@ -45,9 +49,13 @@ public class ListRecordAdapter extends BaseAdapter{
 		
 		CommonVL.startAnimComeInBottom(view, mContext);
 		
-		TextView title = (TextView)		view.findViewById(R.id.txtRecordNameFile);
+		TextView title 	= (TextView)	view.findViewById(R.id.txtRecordNameFile);
+		TextView time 	= (TextView)	view.findViewById(R.id.txtRecordTime);
+		TextView size	= (TextView)	view.findViewById(R.id.txtRecordSizeFile);
 		
 		title.setText(listAudio.get(position).getTitle());
+		time.setHint(listAudio.get(position).getDate());
+		size.setHint(listAudio.get(position).getSize());
 		
 		return view;
 	}

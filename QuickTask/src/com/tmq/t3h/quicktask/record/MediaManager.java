@@ -10,7 +10,9 @@ import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
+import android.provider.ContactsContract.Data;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Audio.Media;
 import android.util.Log;
 
 
@@ -63,37 +65,32 @@ public class MediaManager implements Runnable{
 			MediaStore.Audio.Media.TITLE,
 			MediaStore.Audio.Media.DATA,
 			MediaStore.Audio.Media.DISPLAY_NAME,
-			MediaStore.Audio.Media.DURATION
+			MediaStore.Audio.Media.DURATION,
+			MediaStore.Audio.Media.SIZE,
+			MediaStore.Audio.Media.DATE_MODIFIED
 		};
 		String selection = MediaStore.Audio.Media.IS_MUSIC + " != 0 AND " +
 	            MediaStore.Audio.Media.DATA + " LIKE '" + CommonVL.PATH_RECORD_FILE + "/%'"; 
-		Cursor c = mContentR.query(uri, null, selection, null, null);
+		Cursor c = mContentR.query(uri, null, selection, null, Media.DATE_MODIFIED + " desc");
 		if (c==null) return;
 		
-//		String columNames[] = c.getColumnNames();	// Lay tat ca cac truong trong Audio
-//		for (String name: columNames){
-//			Log.i(TAG, "ColumName:   " + name);
-//		}
-//		/*		_data: Duong dan
-//		 * 		_type: Loai
-//		 * 		_title: Ten
-//		 * 		_display_name: Ten khong bao gom duong dan
-//		 */
-		
-		
 		c.moveToFirst();
-		int indexTitle = c.getColumnIndex(MediaStore.Audio.Media.TITLE);
-		int indexData = c.getColumnIndex(MediaStore.Audio.Media.DATA);
-		int indexDisplayName = c.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
-		int indexDuration = c.getColumnIndex(MediaStore.Audio.Media.DURATION);
+		int indexTitle		= c.getColumnIndex(MediaStore.Audio.Media.TITLE);
+		int indexData 		= c.getColumnIndex(MediaStore.Audio.Media.DATA);
+		int indexDisplayName= c.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
+		int indexDuration	= c.getColumnIndex(MediaStore.Audio.Media.DURATION);
+		int indexSize		= c.getColumnIndex(MediaStore.Audio.Media.SIZE);
+		int indexDateAdded	= c.getColumnIndex(MediaStore.Audio.Media.DATE_MODIFIED);
 		
-		String title, data, displayName, duration;
+		String title, data, displayName, duration, size, date;
 		while(!c.isAfterLast()){
-			title = c.getString(indexTitle);
-			data = c.getString(indexData);
+			title		= c.getString(indexTitle);
+			data		= c.getString(indexData);
 			displayName = c.getString(indexDisplayName);
-			duration = c.getString(indexDuration);
-			listAudio.add(new AudioItem(title, data, displayName, duration));
+			duration 	= c.getString(indexDuration);
+			size		= c.getString(indexSize);
+			date		= c.getString(indexDateAdded);
+			listAudio.add(new AudioItem(title, data, displayName, duration, size, date));
 			/*
 			Log.i(TAG, "-----------------------------------");
 			Log.i(TAG, "Title:	" + title);
