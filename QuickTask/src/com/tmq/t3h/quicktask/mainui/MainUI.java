@@ -3,6 +3,7 @@ package com.tmq.t3h.quicktask.mainui;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -138,17 +139,33 @@ public class MainUI extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_demo:
+		case R.id.action_menu_demo:
 			Intent intent = new Intent(this, BtnOpen.class);
 			startService(intent);
 			break;
-		case R.id.action_settings:
+		case R.id.action_menu_settings:
 			Intent intentSetting = new Intent(this, SettingActivity.class);
 			startActivity(intentSetting);
+			break;
+		case R.id.action_menu_help:
+			break;
+		case R.id.action_menu_about:
+			showMenuAboutDialog();
 			break;
 		}
 		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private Dialog dialog;
+	private void showMenuAboutDialog(){
+		dialog = new Dialog(this, R.style.LargeDialog);
+		dialog.setTitle(R.string.action_menu_about);
+		
+		dialog.setContentView(R.layout.menu_about);
+		
+		dialog.show();
+		
 	}
 	
 }

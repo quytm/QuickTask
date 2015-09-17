@@ -39,7 +39,7 @@
         </activity>
         <activity 
             android:name="com.tmq.t3h.quicktask.SettingActivity"
-            android:label="@string/action_settings">
+            android:label="@string/action_menu_settings">
             
         </activity>
         
