@@ -1,4 +1,10 @@
-package com.tmq.t3h.quicktask;
+package com.tmq.t3h.quicktask.optionmenu;
+
+import com.tmq.t3h.quicktask.CommonVL;
+import com.tmq.t3h.quicktask.DataContactSharedPref;
+import com.tmq.t3h.quicktask.R;
+import com.tmq.t3h.quicktask.R.id;
+import com.tmq.t3h.quicktask.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

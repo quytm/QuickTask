@@ -8,14 +8,18 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.tmq.t3h.quicktask.CommonVL;
 import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
-import com.tmq.t3h.quicktask.SettingActivity;
+import com.tmq.t3h.quicktask.optionmenu.AdapterForMenuHelp;
+import com.tmq.t3h.quicktask.optionmenu.SettingActivity;
 import com.tmq.t3h.quicktask.service.BtnOpen;
 
 public class MainUI extends Activity {
@@ -148,6 +152,7 @@ public class MainUI extends Activity {
 			startActivity(intentSetting);
 			break;
 		case R.id.action_menu_help:
+			showMenuHelpDialog();
 			break;
 		case R.id.action_menu_about:
 			showMenuAboutDialog();
@@ -167,5 +172,21 @@ public class MainUI extends Activity {
 		dialog.show();
 		
 	}
+	
+	private void showMenuHelpDialog(){
+		dialog = new Dialog(this, R.style.LargeDialog);
+		dialog.setTitle(R.string.action_menu_help);
+		
+		LayoutInflater lf = dialog.getLayoutInflater();
+		View view = lf.inflate(R.layout.help_main_ui, null);
+		ViewPager vpr = (ViewPager) view.findViewById(R.id.helpViewPager);
+		vpr.setAdapter(new AdapterForMenuHelp(this));
+		
+		dialog.setContentView(view);
+		
+		dialog.show();
+		
+	}
+	
 	
 }

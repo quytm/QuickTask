@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity 
-            android:name="com.tmq.t3h.quicktask.SettingActivity"
+            android:name="com.tmq.t3h.quicktask.optionmenu.SettingActivity"
             android:label="@string/action_menu_settings">
             
         </activity>
