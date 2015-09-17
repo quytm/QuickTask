@@ -30,7 +30,6 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 	private ListNoteAdapter adapter;
 	private Context mContext;
 	
-	private AdapterView<?> adapterView = null;
 	private Dialog dialog;
 	private EditText edtContact, edtContent;
 	private int posViewIsClick = -1;
@@ -59,7 +58,6 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		Toast.makeText(mContext, adapter.getItem(position).note, Toast.LENGTH_SHORT).show();
 		showDialogWhenClickItem(view);
 		
-		adapterView = parent;
 		posViewIsClick = position;
 		currentView = view;
 	}
@@ -106,10 +104,9 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 		switch (v.getId()) {
 			case R.id.btnNoteDialogDelete:
 				Toast.makeText(mContext, "Note is deleted", Toast.LENGTH_SHORT).show();
-				adapterView.removeViews(posViewIsClick, 1);
 				sharedPref.removeData(adapter.getItem(posViewIsClick).position);
-				Log.i(TAG, "pos = " + adapter.getItem(posViewIsClick).position);
-				adapter.removeItem(posViewIsClick);
+				adapter = new ListNoteAdapter(mContext);
+				listNote.setAdapter(adapter);
 				break;
 			case R.id.btnNoteDialogCancel:
 				Toast.makeText(mContext, "Close", Toast.LENGTH_SHORT).show();
@@ -122,7 +119,9 @@ public class NoteFragment extends Fragment implements	OnItemClickListener, OnCli
 				Toast.makeText(mContext, "Note is changed", Toast.LENGTH_SHORT).show();
 				txtContent.setText(edtContent.getText().toString());
 				adapter.setItem(edtContact.getText().toString(), edtContent.getText().toString(), posViewIsClick);
-				sharedPref.setNoteDataAt(adapter.getItem(posViewIsClick).position, edtContent.getText().toString());
+				sharedPref.setNoteDataAt(adapter.getItem(posViewIsClick).position, 
+											edtContent.getText().toString(),
+											edtContact.getText().toString());
 				break;
 		}
 		

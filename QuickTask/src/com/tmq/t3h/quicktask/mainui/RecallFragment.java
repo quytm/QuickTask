@@ -1,9 +1,9 @@
 package com.tmq.t3h.quicktask.mainui;
 
-import java.util.Calendar;
-
+import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,16 +24,17 @@ import android.widget.Toast;
 import com.tmq.t3h.quicktask.DataContactSharedPref;
 import com.tmq.t3h.quicktask.R;
 import com.tmq.t3h.quicktask.recall.ListRecallAdapter;
+import com.tmq.t3h.quicktask.recall.RemineRecallLater;
 
 public class RecallFragment extends Fragment implements OnItemClickListener, 
 														OnClickListener,
 														OnSeekBarChangeListener{
 	private static final String TAG = "RecallFragment";
 	private View mRootView;
+	private ListView listRecall;
 	private ListRecallAdapter adapter;
 	private Context mContext;
 	
-	private AdapterView<?> adapterView = null;
 	private Dialog dialog;
 	private SeekBar sbrHour, sbrMinutes;
 	private TextView txtHour, txtMinutes;
@@ -53,7 +54,7 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 	private void initViews(){
 		adapter = new ListRecallAdapter(mContext);
 		
-		ListView listRecall = (ListView) mRootView.findViewById(R.id.listRecallLater);
+		listRecall = (ListView) mRootView.findViewById(R.id.listRecallLater);
 		listRecall.setAdapter(adapter);
 		listRecall.setOnItemClickListener(this);
 	}
@@ -63,7 +64,6 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 			long id) {
 		showDialogWhenClickItem(view);
 		
-		adapterView = parent;
 		posViewIsClick = position;
 		currentView = view;
 	}
@@ -118,9 +118,9 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 		switch (v.getId()) {
 		case R.id.btnRecallDialogDeleteItem:
 			Toast.makeText(mContext, "Recall is deleted", Toast.LENGTH_SHORT).show();
-			adapterView.removeViews(posViewIsClick, 1);
 			sharedPref.removeData(adapter.getItem(posViewIsClick).position);
-			adapter.removeItem(posViewIsClick);
+			adapter = new ListRecallAdapter(mContext);
+			listRecall.setAdapter(adapter);
 			break;
 		case R.id.btnRecallDialogCancel:
 			Toast.makeText(mContext, "Close", Toast.LENGTH_SHORT).show();
@@ -129,6 +129,12 @@ public class RecallFragment extends Fragment implements OnItemClickListener,
 			Toast.makeText(mContext, "Time to recall is changed", Toast.LENGTH_SHORT).show();
 			int hoursRemine = sbrHour.getProgress();
 			int minutesRemine = sbrMinutes.getProgress();
+
+			Intent intent = new Intent(mContext, MainUI.class);
+			PendingIntent sender = PendingIntent.getBroadcast(mContext, adapter.getItem(posViewIsClick).recallId, intent, 0);
+			AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+
+			alarmManager.cancel(sender);
 			
 //			txtContent.setText(edtContent.getText().toString());
 //			adapter.setItem(edtContact.getText().toString(), edtContent.getText().toString(), posViewIsClick);

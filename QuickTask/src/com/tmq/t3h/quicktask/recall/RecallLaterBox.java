@@ -127,11 +127,6 @@ public class RecallLaterBox extends LayoutInWindowMgr implements
 	
 	
 	private void setTimeToRemine(){
-//		int minutes = calendar.get(Calendar.MINUTE);
-//		int hours = calendar.get(Calendar.HOUR_OF_DAY);
-		
-//		int minutesRemine = ( minutes + sbrMinute.getProgress() ) % 60;
-//		int hoursRemine = ( hours + (minutes + sbrMinute.getProgress()) / 60 ) % 24;
 		int minutesRemine = sbrMinute.getProgress();
 		int hoursRemine = sbrHour.getProgress();
 

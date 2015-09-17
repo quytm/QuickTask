@@ -76,6 +76,7 @@ public class ListNoteAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
+		if (position>=listNote.size()) Log.i(TAG, "Item is null");
 		if (view==null){
 			view = lf.inflate(R.layout.note_item_in_list, null);
 		}

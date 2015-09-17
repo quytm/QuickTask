@@ -87,7 +87,7 @@ public class DataContactSharedPref {
 		
 		// If data is Note and Recall -> Set note="null"
 		if ( (getData(position).recallId != -1)   &&   (!getData(position).note.equals("null")) ){
-			setNoteDataAt(position, "null");
+			setNoteDataAt(position, "null", getData(position).name);
 //			Log.i(TAG, "data is recall " + position);
 			return;
 		}
@@ -135,14 +135,16 @@ public class DataContactSharedPref {
 //		Log.i(TAG, "setData at " + position);
 	}
 	
-	public void setNoteDataAt(int position, String newNote){
+	public void setNoteDataAt(int position, String newNote, String newContact){
 		DataItem item = getData(position);
 		if (item.note.equals("null")) return;
 		else{
 			SharedPreferences.Editor editor = data.edit();
 			
 			editor.remove(CommonVL.CONTACT_NOTE_ 	+ position);
+			editor.remove(CommonVL.CONTACT_NAME_ 	+ position);
 			editor.putString(CommonVL.CONTACT_NOTE_ + position, newNote);
+			editor.putString(CommonVL.CONTACT_NAME_	+ position, newContact);
 			
 			editor.commit();
 		}

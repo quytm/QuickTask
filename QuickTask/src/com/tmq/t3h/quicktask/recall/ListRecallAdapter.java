@@ -33,7 +33,7 @@ public class ListRecallAdapter extends BaseAdapter{
 		DataContactSharedPref.DataItem item;
 		for (int i=size; i>=0; i--){
 			item = dataContact.getData(i);
-			if (item.note.equals("null")){
+			if (item.note.equals("null") && !item.recallTime.equals("null")){
 				listRecall.add(item);
 			}
 		}
