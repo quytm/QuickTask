@@ -37,6 +37,7 @@ public class MediaManager implements Runnable{
 	private int repeat;
 	private int playState;
 	
+	public void resetMedia(){ mPlayer = new MediaPlayer();}
 	
 	public MediaManager(Context c) {
 		mContext = c;
@@ -106,8 +107,11 @@ public class MediaManager implements Runnable{
 	}
 	
 	public void loadAudioItem(String path){
+		mPlayer = new MediaPlayer();
 		if (mPlayer.isPlaying() || playState==PAUSING){
+			Log.i(TAG, "media stop");
 			mPlayer.stop();
+			Log.i(TAG, "media reset");
 			mPlayer.reset();
 		}
 		try {
@@ -147,6 +151,7 @@ public class MediaManager implements Runnable{
 			mPlayer.stop();
 		}
 		mPlayer.release();
+		Log.i(TAG, "Release..............");
 		playState = RELEASE;
 	}
 	

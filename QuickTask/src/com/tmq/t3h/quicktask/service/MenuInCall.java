@@ -180,14 +180,24 @@ public class MenuInCall extends LayoutInWindowMgr implements OnClickListener{
 				removeLayoutInScreen();
 			}
 		}, myAni.getDuration());
+		Intent intent = new Intent();
+		intent.putExtra(CommonVL.PHONE_NUMBER, phoneNumber);
+		intent.putExtra(CommonVL.PHONE_STATE, phoneState);
+		intent.putExtra(CommonVL.PHONE_DISPLAY_NAME, phoneDisplayName);
+		
+		intent.setClass(this, BtnOpen.class);
+		startService(intent);
 		super.onDestroy();
 	}
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
-		phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
-		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		String number = intent.getStringExtra(CommonVL.PHONE_NUMBER);
+		if (number!=null){
+			phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
+			phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
+			phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		}
 		Log.i(TAG, "on start command: " + phoneDisplayName + phoneNumber + phoneState);
 		boxIsShow = intent.getIntExtra(CommonVL.NOTI_STATE_BOX, 0);
 		return super.onStartCommand(intent, flags, startId);

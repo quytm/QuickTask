@@ -1,6 +1,7 @@
 package com.tmq.t3h.quicktask.service;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.Toast;
@@ -57,9 +58,12 @@ public class BtnOpen extends BtnComponent implements OnLongClickListener{
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		phoneNumber = intent.getStringExtra(CommonVL.PHONE_NUMBER);
 		phoneState = intent.getStringExtra(CommonVL.PHONE_STATE);
-		phoneDisplayName = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		String name = intent.getStringExtra(CommonVL.PHONE_DISPLAY_NAME);
+		if (name!=null) phoneDisplayName = name;
 		if (phoneNumber==null) phoneNumber = "000 000 000";
 		if (phoneState==null) phoneState = "Idle Idle Idle";
+		Log.i(TAG, "name = " + phoneDisplayName);
+//		if (phoneDisplayName==null) phoneDisplayName = "No name";
 		return super.onStartCommand(intent, flags, startId);
 	}
 	
