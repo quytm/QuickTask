@@ -1,1 +1,22 @@
 Delay...
+// Công vi?c c?n làm khi ti?p t?c d? án:
+- C?u trúc h? th?ng:
+	+ Thay ð?i vi?c lýu d? li?u t? SharedPreferences sang SQLite
+	+ Chia m?t s? tác v? ra các Thread khác
+	+ Thao tác trên ListView làm th? nào ð? khi Edit th? không ph?i set l?i Adapter
+- Note:
+	+ Khi t?t NoteBox, n?i dung ph?n ghi chú ph?i ðý?c lýu l?i (ph?ng trý?ng h?p ngý?i dùng l? tay t?t ði)
+	+ Thêm nút t?o ghi chú m?i
+- Recall later:
+	+ S?a l?i thông báo g?i l?i: c?n co âm thanh, trong thông báo có th? có s?n m?t hai nút ð? ch?n nhanh: Recall now, Not now( thông báo l?i sau 10')
+- Tùy ch?n:
+	+ Giao di?n:
+		. Khi ch?n Button trong Menu, th? nên thay ð?i background ð? d? nh?n bi?t ðang dùng menu nào
+		. Tùy ch?nh màu theme cho ?ng d?ng
+	+ Ch? ð? sort: S?p x?p theo:
+		. Th?i gian: trý?c, sau
+		. Tên: a-z, z-a
+		. ...
+	+ Setting:
+		. Cài âm cho thông báo g?i l?i
+- ...
